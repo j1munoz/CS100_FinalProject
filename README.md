@@ -1,31 +1,32 @@
- > As you complete each section you **must** remove the prompt text. Every *turnin* of this project includes points for formatting of this README so keep it clean and keep it up to date. 
- > Prompt text is any lines beginning with "\>"
- > Replace anything between \<...\> with your project specifics and remove angle brackets. For example, you need to name your project and replace the header right below this line with that title (no angle brackets). 
-# \<Project title\>
- > Your author list below should include links to all members GitHub (remove existing author).
- 
- > Authors: \<[Jeffrey McDaniel](https://github.com/jmcda001)\>
-
- > You will be forming a group of **FOUR** students and working on an interesting project. The project has 4 phases, each one with specific requirements. A list of proposed project ideas that have been successful in previous quarters is listed in the project specifications document on Canvas. You can select an idea from the list and start thinking about the features you will implement. If you want to propose your own original idea, you will have to contact your instructor to discuss the project and obtain written permission before you submit your project proposal (Phase 1). The project work should be divided almost equally among team members. You can of course help each other, but it needs to be clear who will be responsible for which features. Additionally, you are expected to follow Scrum patterns, specifically the use of a Scrum (Project) board, Sprints, and Scrum meetings.
-
- > ## Expectations
- > * The backend of your project should be implemented in C++. If you wish to choose anoher programming language (e.g. Java, Python), please discuss with your lab TA to obtain permission.
- > * You can incorporate additional technologies/tools but they must be approved (in writing) by the instructor or the TA.
- > * Each member of the group **must** be committing code regularly and make sure their code is correctly attributed to them. We will be checking attributions to determine if there was equal contribution to the project.
- > * **Each member of the group must actively participate in the Github Project board, writing unit tests, and reviewing commited code.**
-> * All project phases are to be submitted to this GitHub repository. You should modify this README file to reflect the different phases of the project. In addition, you should regularly hold sprint meetings with your group. You will need to hold two to three scrum/check-in meetings with your lab TA/reader at different times in addition to the final demo.
+# A Villain's Revenge
+Authors: [Draylend Chow](https://github.com/Draylend), [Jimmy Munoz](https://github.com/j1munoz), [Kevin Abraham](https://github.com/RJKS100), and [Chris Whall](https://github.com/WorthyC)
 
 ## Project Description
- > Your project description should summarize the project you are proposing. Be sure to include:
- > * Why is it important or interesting to you?
- > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
- > * What will be the input/output of your project?
- > * What are the features that the project provides?
- > This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
- > 
- > You also need to set up an empty project board using GitHub projects (board view with default columns). Make sure you add the board under your project repository. You should also have a Product Backlog and In testing columns added. All columns should be in the right order.
-> 
-> Finally, one member from your team needs to submit the Project Group Signups form (link available on Canvas) to provide a link to your team's project repository before the deadline for this porposal phase.
+**A Villain's Revenge** is an endless roguelite text-based adventure game. Compared to traditional games where the player is the hero, this time the user will _be_ the villain. In this role, they will summon monsters, cast spells, and upgrade items to seek revenge on the world. By playing from the perspective of the bad guy, hopefully people will see the villain isn't as evil all along.
+
+### Gameplay Overview (Input/Output)
+At the start of logging in, the user will be prompted with a main menu. Here, they can select to play, equip/change their equipment, and/or go to the shop. Depending on the chosen option, a new prompt will appear listing the respective choices. For example, if the user chooses to shop, a new screen will appear displaying all items available to buy and their current money amount. The user can now enter an item's number to buy or quit. If the user wishes to buy an item, a confirmation will be asked, and if agreed again, a "receipt" will be shown and the user may buy more items after. If the user has insufficient funds, they will be denied.
+
+When the user begins the game, a randomly generated area will be chosen with its respective enemy types. It will show the player's health, enemy health, and resource meter. The player can choose from a list of options: attack, items, or quit. When attacking, they can summon a monster or cast a spell. Both actions require mana (which generates after every turn). If the user summons a monster, a text will display individually showing that monster's choice of attack every turn. Additionally, it's own health bar will also appear on screen. If the user chooses to cast a spell, they will have the option to choose a target to attack at. After the user attacks (and summoned monsters), the enemy's turn begins. The screen will display the current health of enemies and display the enemies attacks and damage numbers. When an enemy dies, it has a chance to drop an item; a text will be displayed notifying the player an item has been added to their inventory. This cycle continues until all enemies are defeated or the user loses. In a roguelite format, there is no "end goal", it is an endless gameplay cycle. The game will end when the user loses (no more health) or quits. The user can now buy new items from the shop or check out monster drops and get stronger each run.
+
+### Features:
+- Start Screen / Main Menu
+- User Menu during gameplay
+- Permadeath
+- Endless Levels
+- Randomly Generated Levels (towns, forests, castles, etc.)
+- Random Events
+- Shop System w/ Money
+- Unique Monsters and Spells
+- Upgrading System
+- Files to Save Progress
+
+### Importance
+Video games have been a large part of our lives growing up. Not only as a source of entertainment, but an outlet to explore our interests, partake in strategic planning, and a fun medium to bond with friends. When used correctly, they can be a great source to connect with others. We think creating our own video game would be a fun idea to try and appreciate all the planning and development that goes into making one. Compared to the functionality of other programs who have a determined purpose, a video game is less rigid in the application of it. It's main goal is to bring fun, and arguably, that can be the hardest thing to achieve sometimes. A video game is the perfect challenge to tackle and have fun with.
+
+### Languages and Technologies
+We will be using C++ to code our project. Additionally, we will utilize GitHub for version control and VS Code as our chosen IDE to develop in. Valgrind is also a tool we will make use of to ensure the quality of our project has no memory leaks and errors. Lastly, we will also use [Draw.io](https://app.diagrams.net/) for flowcharting and UML Diagram documentation.
+
  > ## Phase II
  > In addition to completing the "User Interface Specification" and "Class Diagram" sections below, you will need to:
  > * Create an "Epic" (note) for each feature. Place these epics in the `Product Backlog` column
