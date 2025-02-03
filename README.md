@@ -11,15 +11,15 @@ When the user begins the game, a randomly generated area will be chosen with its
 
 ### Features:
 - Start Screen / Main Menu
-- User Menu during gameplay
+- User Menu during gameplay (attack, item, or quit)
 - Permadeath
 - Endless Levels
-- Randomly Generated Levels (towns, forests, castles, etc.)
-- Random Events
 - Shop System w/ Money
-- Unique Monsters and Spells
+- Unique Monsters, Spells, and Enemies
 - Upgrading System
-- Files to Save Progress
+- ~~Randomly Generated Levels (towns, forests, castles, etc.)~~
+- ~~Random Events~~
+- ~~Files to Save Progress~~
 
 ### Importance
 Video games have been a large part of our lives growing up. Not only as a source of entertainment, but an outlet to explore our interests, partake in strategic planning, and a fun medium to bond with friends. When used correctly, they can be a great source to connect with others. We think creating our own video game would be a fun idea to try and appreciate all the planning and development that goes into making one. Compared to the functionality of other programs who have a determined purpose, a video game is less rigid in the application of it. It's main goal is to bring fun, and arguably, that can be the hardest thing to achieve sometimes. A video game is the perfect challenge to tackle and have fun with.
