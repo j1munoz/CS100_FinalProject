@@ -27,30 +27,27 @@ Video games have been a large part of our lives growing up. Not only as a source
 ### Languages and Technologies
 We will be using C++ to code our project. Additionally, we will utilize GitHub for version control and VS Code as our chosen IDE to develop in. Valgrind is also a tool we will make use of to ensure the quality of our project has no memory leaks and errors. Lastly, we will also use [Draw.io](https://app.diagrams.net/) for flowcharting and UML Diagram documentation.
 
- > ## Phase II
- > In addition to completing the "User Interface Specification" and "Class Diagram" sections below, you will need to:
- > * Create an "Epic" (note) for each feature. Place these epics in the `Product Backlog` column
- > * Complete your first *sprint planning* meeting to plan out the next 7 days of work.
- >   * Break down the "Epics" into smaller actionable user stories (i.e. smaller development tasks). Convert them into issues and assign them to team members. Place these in the `TODO` column (aka Sprint Backlog).
- >   * These cards should represent roughly 7 days worth of development time for your team. Then, once the sprint is over you should be repeating these steps to plan a new sprint, taking you until your second scrum meeting with the reader in phase III.
- > * Each team member needs to submit the Peer Evaluation Form on Canvas for this phase. In this form, you need to fill in the names of all team members, the percentage of work contributed by each member for phase  II, and a description of their contributions. Remember that each team member should submit the form individually.
- > * Schedule two check-ins using Calendly. Both time slots should be during your lab on week 6. Your entire team must be present for both check-ins.
- >   * The first check-in needs to be scheduled with your lab TA. During that meeting, you will discuss your project design/class diagram from phase II.
- >   * The second check-in should be scheduled with a reader. During that meeting you will discuss:
- >     * The tasks you are planning for the first sprint
- >     * How work will be divided between the team members
 ## User Interface Specification
- > Include a navigation diagram for your screens and the layout of each of those screens as desribed below. For all the layouts/diagrams, you can use any tool such as PowerPoint or a drawing program. (Specification requirement is adapted from the User Interface Design Document Template of CMSC 345 at the University of Maryland Global Campus)
 
 ### Navigation Diagram
-> Draw a diagram illustrating how the user can navigate from one screen to another. Here is an [example](https://creately.com/diagram/example/ikfqudv82/user-navigation-diagram-classic?r=v). It can be useful to label each symbol that represents a screen so that you can reference the screens in the next section or the rest of the document if necessary. Give a brief description of what the diagram represents.
+In this navigation diagram, the user will be greeted with a main menu screen upon entering the program. They will have the option to battle, go to the shop, or view/select their equipment. This is the resting area of the program. Both the shop and equip screen will be in a loop if the user continues to keep staying. Once they quit, they will be brought back to the main menu.
+
+If the user chooses to battle, they will be taken to a new screen with new prompts. Here, they have the option to fight, view inventory, or quit. They repeat these options until the user quits, wins, or loses. Either outcome, they will be brought back to the main menu to repeat all actions again.
+
+![CS-100 Navigation drawio](https://github.com/user-attachments/assets/ab4ddf07-1b55-4bc5-97cc-a7e9fc5826e2)
 
 ### Screen Layouts
-> Include the layout of each of your screens. The layout should describe the screen’s major components such as menus and prompts for user inputs and expected output, or any graphical user interface components if applicable (e.g. buttons, text boxes, etc). Explain what is on the layout, and the purpose of each menu item, button, etc. If many screens share the same layout, start by describing the general layout and then list the screens that will be using that layout and the differences between each of them.
+In these Screen Layouts, we can see an example of what the game will look like when running.
+
+A list of numbers divided by hypens represnts a menu of choices that the user may choose from. Looking at the image below, we can see the various screens the user will come across when running the program.
+
+![CS-100 ScreenLayout drawio](https://github.com/user-attachments/assets/1281ce1c-553d-4ef5-9d06-a9498c72eb43)
 
 ## Class Diagram
- > Include a **class diagram(s)** for your project and a **description** of the diagram(s). Your class diagram(s) should include all the main classes you plan for the project. This should be in sufficient detail that another group could pick up the project this point and successfully complete it. Use proper UML notation (as discussed in the course slides).
- 
+Here is a UML Diagram of all the classes within our program. The blue boxes next to each class describe the class in more detail.
+
+![CS-100 UML drawio](https://github.com/user-attachments/assets/3b2ad942-3ece-4248-ae36-24eb5d80eeeb)
+
  > ## Phase III
  > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on week 8 during lab time.
  
