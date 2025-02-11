@@ -15,6 +15,7 @@ class Character {
         float currentHealth;        // Current Health
 
         int mana;                   // Mana Points for spells
+        int maxMana;                // Max Mana Points
         int defense;                // Defense stat
 
         Weapon currentWeapon;           // Current equipped item
@@ -31,7 +32,8 @@ class Character {
 
         int getMana();                  // Return mana
         void setMana(int);              // Set mana cost
-        void displayHealth();           // Display health bar
+        int getMaxMana();               // Return max mana
+        void displayHealth();           // Display health bar + mana
         float getHealth();              // Return health
         void setHealth(float);          // Set health
         float getTotalHealth();         // Get max heatlh

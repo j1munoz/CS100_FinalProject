@@ -13,6 +13,10 @@ void Character::setMana(int amount) {
     this->mana = amount;
 }
 
+int Character::getMaxMana() {
+    return this->maxMana;
+}
+
 void Character::displayHealth() {
     // Implement code here
 }
