@@ -17,9 +17,10 @@ class Item {
 		string getRarity();         // Returns rarity
         string getName();           // Returns name
         virtual float getDmg();     // Calculates damage
-        void setDmg(float amount);  // Sets damage
+        void setDmg(float);         // Sets damage
         int getPrice();             // Returns price
-        void displayDescription();  // Displays all stats of an item
+        
+        virtual void displayDescription();  // Displays all stats of an item
 };
 
 #endif /* ITEM_HPP */
