@@ -3,4 +3,5 @@ project(Final_Project)
 
 ADD_EXECUTABLE(villain_revenge
     src/main.cpp
+    src/enemy.cpp
 )
