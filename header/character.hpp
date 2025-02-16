@@ -9,7 +9,7 @@
 using std::string;
 
 class Character {
-	private:
+	protected:
 		string name;                // Name of Entity
         float totalHealth;          // Maximum Health
         float currentHealth;        // Current Health
