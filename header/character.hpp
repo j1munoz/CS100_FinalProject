@@ -22,7 +22,10 @@ class Character {
         std::vector<Spell> spellBook;   // List of spells to use
 	public:
         // Implement default and overloaded constructor
-
+        Character();
+        Character(string name, float totalHealth, int mana, int defense)
+        : name(name), totalHealth(totalHealth), currentHealth(totalHealth), mana(mana), maxMana(mana), defense(defense) {}
+        
 		bool isAlive();     // Tests if entity is alive
 
         // NOTE: These functions are vitual because each attack
