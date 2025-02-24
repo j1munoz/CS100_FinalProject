@@ -14,6 +14,7 @@ class Player : public Character {
         bool isCasting;
 	public:
         // Implement default and overloaded constructor
+        Player();
 
         // Battle Functions
         void equipItem(int);            // Given an index, return Item in inventory

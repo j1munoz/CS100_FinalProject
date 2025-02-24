@@ -1,5 +1,19 @@
 #include "../header/player.hpp"
 
+Player::Player() {
+    currency = 0;
+    skillPoints = 0;
+    monsterCount = 0;
+    maxMonsterCount = 0;
+    maxMana = 0;
+    isCasting = false;
+    name = "Villain";
+    totalHealth = 50;
+    currentHealth = 50;
+    mana = 20;
+    defense = 10;
+}
+
 void Player::equipItem(int index) {
     // Implement code here
 }
