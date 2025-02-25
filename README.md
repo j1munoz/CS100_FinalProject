@@ -46,7 +46,7 @@ A list of numbers divided by hypens represnts a menu of choices that the user ma
 ## Class Diagram
 Here is a UML Diagram of all the classes within our program. The blue boxes next to each class describe the class in more detail.
 
-![CS-100 UML drawio](https://github.com/user-attachments/assets/3b2ad942-3ece-4248-ae36-24eb5d80eeeb)
+![CS-100 UML_2 0 drawio](https://github.com/user-attachments/assets/0c592727-7e3f-4739-8933-9284164f822b)
 
  > ## Phase III
  > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on week 8 during lab time.
