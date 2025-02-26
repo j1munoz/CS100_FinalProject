@@ -10,7 +10,7 @@ class Monster : public Character {
         // Implement default and overloaded constructor
 
         int getLifetime();      // Return lifetime
-        int setLifetime(int);   // Sets the lifetime
+        void setLifetime(int);   // Sets the lifetime
         
         // We must override these functions from Abstract class
         float useAttack() override;  // If the entity can't perform this, return 0

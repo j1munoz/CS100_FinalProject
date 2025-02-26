@@ -1,14 +1,15 @@
 #include "../header/enemy.hpp"
 
-Enemy::Enemy() : Character("Enigma", 999, 999, 999){
+Enemy::Enemy() : Character("Enigma", 999, 999, 999){}
 
-                //Format is as follows for hardcoding enemies:
-                //| Name | Health | Mana | Defense |
+        //Format is as follows for hardcoding enemies:
+        //| Name | Health | Mana | Defense |
 
-                enemyList.push_back(Enemy("Peasent", 10, 0, 2));
-                enemyList.push_back(Enemy("Adventurer", 30, 10, 10));
-                enemyList.push_back(Enemy("Knight", 80, 25, 30));
-        }
+std::vector<Enemy> Enemy::enemyList ={
+        Enemy("Peasent", 10, 0, 2),
+        Enemy("Adventurer", 30, 10, 10),
+        Enemy("Knight", 80, 25, 30)
+};
 
 float Enemy::rollDrop() {
     // Implement code here
@@ -20,7 +21,7 @@ vector<Enemy>& Enemy::getEnemyList() {
     return enemyList; 
 }
 
-string Enemy::getName() {
+string Enemy::getName() const {
 
     return name;
 }

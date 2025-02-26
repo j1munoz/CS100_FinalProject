@@ -8,4 +8,7 @@ ADD_EXECUTABLE(villain_revenge
     src/item.cpp
     src/spell.cpp
     src/weapon.cpp
+    src/gamedata.cpp
+    src/player.cpp
+    src/monster.cpp
 )

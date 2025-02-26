@@ -4,7 +4,7 @@ int Monster::getLifetime() {
     return this->lifetime;
 }
 
-int Monster::setLifetime(int amount) {
+void Monster::setLifetime(int amount) {
     this->lifetime = amount;
 }
 

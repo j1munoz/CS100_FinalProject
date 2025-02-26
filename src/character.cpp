@@ -1,5 +1,7 @@
 #include "../header/character.hpp"
 
+Character::Character() {}
+
 bool Character::isAlive() {
     if(this->currentHealth <= 0) return false;
     return true;

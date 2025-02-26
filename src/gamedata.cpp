@@ -1,5 +1,9 @@
 #include "../header/gamedata.hpp"
 
+void GameData::fillEnemyList() {
+    enemyList = Enemy::getEnemyList();
+}
+
 int GameData::getLvlCount() {
     return this->levelCount;
 }
