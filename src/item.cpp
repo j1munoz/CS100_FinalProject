@@ -1,5 +1,9 @@
 #include "../header/item.hpp"
 
+Item::Item() : name(""), rarity("Common"), dmg(0), price(0) {}
+
+Item::Item(string name, string rarity, float dmg, int price) : name(name), rarity(rarity), dmg(dmg), price(price) {}
+
 string Item::getRarity() {
     return this->rarity;
 }

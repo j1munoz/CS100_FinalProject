@@ -4,17 +4,18 @@
 #include "item.hpp"
 
 class Weapon : public Item {
-        private:
-                float critChance;   // Percentage of success crit
+private:
+        float critChance;      // Percentage of success crit
+        bool rollCritChance(); // Returns if crit chance was successful
 
-                // Private Helper Function
-                bool rollCritChance();  // Returns if crit chance was successful
-        public:
-                // Implement default and overloaded constructor
+public:
+        // Implement default and overloaded constructor
+        Weapon();
+        Weapon(string name, string rarity, float critChance, float dmg, int price);
 
-                float getDmg() override;
+        float getDmg() override;
 
-                void displayDescription() override;  // Displays all stats of an item
+        void displayDescription() override; // Displays all stats of an item
 };
 
 #endif /* WEAPON_HPP */
