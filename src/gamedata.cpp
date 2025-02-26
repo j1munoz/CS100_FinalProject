@@ -1,5 +1,11 @@
 #include "../header/gamedata.hpp"
 
+GameData::GameData(): levelCount(levelCount) {
+
+}
+
+GameData::GameData(int levelCount) {}
+
 int GameData::getLvlCount() {
     return this->levelCount;
 }

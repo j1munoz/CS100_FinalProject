@@ -10,8 +10,8 @@
 #include "shop.hpp"
 
 class GameData {
-	private:
-		std::vector<Weapon> weaponList;
+private:
+        std::vector<Weapon> weaponList;
         std::vector<Spell> spellList;
         std::vector<Enemy> enemyList;
         std::vector<Monster> monsterList;
@@ -19,8 +19,10 @@ class GameData {
         Shop theShop;
         Player user;
         int levelCount;
-	public:
+public:
         // Implement default and overloaded constructor
+        GameData();
+        GameData(int levelCount);
 
         int getLvlCount();
         void setLvlCount(int);
