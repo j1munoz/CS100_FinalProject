@@ -2,13 +2,21 @@
 #define MONSTER_HPP
 
 #include "character.hpp"
+#include <vector>
+using namespace std;
 
 class Monster : public Character {
 	private:
 		int lifetime;   // Lifetime of the summoned monster
+                static vector<Monster> monsterList;
 	public:
         // Implement default and overloaded constructor
+        Monster();
+        Monster(string name, float health, int mana, int defense, int lifetime)
+        : Character(name, health, mana, defense), lifetime(lifetime) {}
 
+        static vector<Monster>& getMonsterList();
+        string getName() const;
         int getLifetime();      // Return lifetime
         void setLifetime(int);   // Sets the lifetime
         
