@@ -13,9 +13,9 @@ class Shop {
 	public:
         // Implement default and overloaded constructor
 
-        Item purchaseItem(int);             // Pass index of item to purchase
-        void displayItems();                // Display items in the shop with prices
-        void fillShop(std::vector<Item>);   // Pass array of items, choose random items to sell
+        Item purchaseItem(int);               // Pass index of item to purchase
+        void displayItems();                  // Display items in the shop with prices
+        void fillShop(std::vector<Item> &);   // Pass array of items, choose random items to sell
 };
 
 #endif /* SHOP_HPP */
