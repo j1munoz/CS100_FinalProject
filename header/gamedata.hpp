@@ -11,7 +11,7 @@
 
 class GameData {
 	private:
-		std::vector<Weapon> weaponList;
+	std::vector<Weapon> weaponList;
         std::vector<Spell> spellList;
         std::vector<Enemy> enemyList;
         std::vector<Monster> monsterList;
@@ -23,6 +23,7 @@ class GameData {
         // Implement default and overloaded constructor
 
         void fillEnemyList();
+        void fillMonsterList();
         int getLvlCount();
         void setLvlCount(int);
         Shop getShop();

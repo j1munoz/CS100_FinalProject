@@ -4,6 +4,10 @@ void GameData::fillEnemyList() {
     enemyList = Enemy::getEnemyList();
 }
 
+void GameData::fillMonsterList() {
+    monsterList = Monster::getMonsterList();
+}
+
 int GameData::getLvlCount() {
     return this->levelCount;
 }
