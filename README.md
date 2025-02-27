@@ -48,27 +48,34 @@ Here is a UML Diagram of all the classes within our program. The blue boxes next
 
 ![CS-100 UML_2 0 drawio](https://github.com/user-attachments/assets/0c592727-7e3f-4739-8933-9284164f822b)
 
- > ## Phase III
- > You will need to schedule a check-in for the second scrum meeting with the same reader you had your first scrum meeting with (using Calendly). Your entire team must be present. This meeting will occur on week 8 during lab time.
- 
- > BEFORE the meeting you should do the following:
- > * Update your class diagram from Phase II to include any feedback you received from your TA/grader.
- > * Considering the SOLID design principles, reflect back on your class diagram and think about how you can use the SOLID principles to improve your design. You should then update the README.md file by adding the following:
- >   * A new class diagram incorporating your changes after considering the SOLID principles.
- >   * For each update in your class diagram, you must explain in 3-4 sentences:
- >     * What SOLID principle(s) did you apply?
- >     * How did you apply it? i.e. describe the change.
- >     * How did this change help you write better code?
- > * Perform a new sprint plan like you did in Phase II.
- > * Make sure that your README file (and Project board) are up-to-date reflecting the current status of your project and the most recent class diagram. Previous versions of the README file should still be visible through your commit history.
->  * Each team member should also submit the Peer Evaluation Form on Canvas for phase III. In this form, you need to fill in the names of all team members, the percentage of work contributed by each member for phase III, and a description of their contributions. Remember that each team member should submit the form individually.
- 
-> During the meeting with your reader you will discuss: 
- > * How effective your last sprint was (each member should talk about what they did)
- > * Any tasks that did not get completed last sprint, and how you took them into consideration for this sprint
- > * Any bugs you've identified and created issues for during the sprint. Do you plan on fixing them in the next sprint or are they lower priority?
- > * What tasks you are planning for this next sprint.
+## Class Diagram with S.O.L.I.D. Principles
+Here is an updated UML Diagram of all the classes within our program using S.O.L.I.D principles. Classes in RED denote new classes made as a result to not violate any principles. Yellow Notes are new descriptions for the newly added classes.
 
+![CS-100 UML_SOLID drawio (1)](https://github.com/user-attachments/assets/85ae6907-db20-4f44-93f9-29dad6674f1a)
+*Note: To avoid cluttering, the notes with the class descriptions can be found [here](https://github.com/user-attachments/assets/18974f37-20e9-46ea-9916-b79e0f869419).*
+
+## S.O.L.I.D. Explanations
+
+### Item Class
+For the `Item` class we applied the SRP, OCP, LSP, and DIP. 
+
+To apply the SRP, we separated the `displayDescription()` function from `Item` class and created a seperate class called `ItemViewer` so that the `Item` class only focuses on holding data for an item rather than doing output as well. Additionally, since `ItemViewer` serves as an abstract class, it follows the OCP by allowing further modification to the `ItemViwer` class without violating its core goal of displaying data to items. The LSP conforms to this class as well since we can replace the `ItemViewer` class with either `WeaponViewer` or `SpellViewer` and it will still output an item description. Lastly, the DIP is not violated since `ItemViewer` depends on an abstract class (`Item`) so it depends on a high-level module. 
+
+This change allows us to write better code because it helps isolate the responsibilities of classes whilst also making debugging easier. Since all the classes are more centralized in their usage, it makes it easier to track problems as well as assign issues that don't have high dependency on other parts of the program.
+
+### Player Class
+For the `Player` class, we applied the SRP, ISP, and DIP.
+
+To apply the SRP, we separated all the `increase[STAT]()` functions and `monster()` related functions to their own respective classes such as `UpgradeSystem` and `MonsterManager`. This way, the `Player` class focuses only on what the user should be able to do whilst having external sources, such as increasing stats and managing the summoned monsters be another classe responsiblity. To adhere to the ISP, we moved the `vector<Spell> spellBook` member variable from the abstract `Character` class to the `Player` class only. This is because not all entities will have spells and it would be useless to have a function that not all inherited class will use. Lastly, for the DIP, rather than having the `UpgradeSystem` depend on the Player class, we let it depend on the `Character` class so it can depend on a higher-level (abstract) module rather than the Player clas (which is more prone to change). This allows the class to not depend on concrete implementation.
+
+This change allows us to write better code since we can focus more on the responsiblities of the player and worry about the other details, such as the skill points and monsters, at another time. The classes don't heavily depend on each other anymore in order for the program to function properly.
+
+### Shop Class
+For the `Shop` class we applied the SRP, OCP, LSP, AND DIP.
+
+To apply the SRP, we seperated the `displayItems()` function from the `Shop` class and created a seperate class called `ShopViewer` whose sole purpose is to display the items currently in the shop. This allows the `Shop` class to just focus on maintaining, storing, removing, and fetching items without taking on another responsiblity such as output. For the OCP and LSP, it came as a result of adhereing to the DIP. Since the `ShopViewer` class depended on the `Shop` class, which was a lower-level module, we made a `InterFaceShop` class that was an abstract class. This way, `Shop` can inherit from it but `ShopViewer` can depend on an abstraction with no concrete implementation. Consequently, now `Shop` is open for modification without destroyign it's original goal (OCP) and it can be replaced with it's subclass (LSP) without violating it's responsiblity of maintaining items.
+
+This change allows us to write better code because it allows our code to scale and grow without having any hard-coded areas. Before, changing something in the `Shop` class could very well require us to redo the `displayItems()` function. However, now that it's in its own class, we can isolate the functionality of the class and edit only what we need to. Even though we ended up making three more classes to manage, it allows our program to be more flexible and object-oriented.
  
  > ## Final deliverable
  > All group members will give a demo to the reader during lab time. ou should schedule your demo on Calendly with the same reader who took your second scrum meeting. The reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
