@@ -2,6 +2,8 @@
 #define ENEMY_HPP
 
 #include "character.hpp"
+#include <vector>
+using namespace std;
 
 class Enemy : public Character {
 	private:
@@ -12,6 +14,9 @@ class Enemy : public Character {
         float rollDrop();
 	public:
         // Implement default and overloaded constructor
+        Enemy();
+        Enemy(string name, float health, int mana, int defense)
+        : Character(name, health, mana, defense) {}
 
         Item dropItem();    // Returns the dropped loot (if applicable)
         

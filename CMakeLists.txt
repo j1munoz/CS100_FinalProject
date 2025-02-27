@@ -3,9 +3,12 @@ project(Final_Project)
 
 ADD_EXECUTABLE(villain_revenge
     src/main.cpp
+    src/enemy.cpp
     src/character.cpp
-    src/player.cpp
     src/item.cpp
     src/spell.cpp
     src/weapon.cpp
+    src/gamedata.cpp
+    src/player.cpp
+    src/monster.cpp
 )

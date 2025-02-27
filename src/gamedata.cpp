@@ -15,6 +15,22 @@ GameData::GameData(): levelCount(1) {
         Spell("Lighting Wave", "Rare", 60, 20, 3, 150),
         Spell("Meteor Shower", "Legendary", 100, 50, 5, 600)
     };
+
+    enemyList = {
+        //Format is as follows for hardcoding enemies:
+        //| Name | Health | Mana | Defense |
+        Enemy("Peasent", 10, 0, 2),
+        Enemy("Adventurer", 30, 10, 10),
+        Enemy("Knight", 80, 25, 30)
+    };
+  
+    monsterList = {
+        //Format is as follows for hardcoding monsters:
+        //| Name | Health | Mana | Defense | Lifetime |
+        Monster("Slime", 10, 0, 2, 5),
+        Monster("Skeleton", 30, 10, 10, 5),
+        Monster("Golem", 80, 25, 30, 5)
+    };
 }
 
 int GameData::getLvlCount() {

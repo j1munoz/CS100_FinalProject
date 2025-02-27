@@ -1,10 +1,12 @@
 #include "../header/monster.hpp"
 
+Monster::Monster() : Character("Enigma", 999, 999, 999), lifetime(999){}
+
 int Monster::getLifetime() {
     return this->lifetime;
 }
 
-int Monster::setLifetime(int amount) {
+void Monster::setLifetime(int amount) {
     this->lifetime = amount;
 }
 
