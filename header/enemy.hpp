@@ -8,7 +8,6 @@ using namespace std;
 class Enemy : public Character {
 	private:
 		Item loot;
-                static vector<Enemy> enemyList;
         float dropChance;
 
         // Private Helper Function
@@ -19,8 +18,6 @@ class Enemy : public Character {
         Enemy(string name, float health, int mana, int defense)
         : Character(name, health, mana, defense) {}
 
-        static vector<Enemy>& getEnemyList();
-        string getName() const;
         Item dropItem();    // Returns the dropped loot (if applicable)
         
         // We must override these functions from Abstract class

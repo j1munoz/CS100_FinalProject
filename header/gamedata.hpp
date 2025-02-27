@@ -21,9 +21,8 @@ class GameData {
         int levelCount;
 	public:
         // Implement default and overloaded constructor
+        GameData();
 
-        void fillEnemyList();
-        void fillMonsterList();
         int getLvlCount();
         void setLvlCount(int);
         Shop getShop();
