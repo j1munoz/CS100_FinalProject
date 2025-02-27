@@ -21,9 +21,3 @@ float Enemy::useAttack() {
 
     return 0;
 }
-
-float Enemy::useSpell() {
-    // Implement code here
-
-    return 0;
-}

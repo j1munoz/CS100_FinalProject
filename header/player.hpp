@@ -7,11 +7,12 @@
 class Player : public Character {
 	private:
 		int currency;
-        int skillPoints;
-        std::vector<Weapon> inventory;
-        int monsterCount;
-        int maxMonsterCount;
-        bool isCasting;
+                int skillPoints;
+                std::vector<Weapon> inventory;
+                int monsterCount;
+                int maxMonsterCount;
+                bool isCasting;
+                std::vector<Spell> spellBook;   // List of spells to use
 	public:
         // Implement default and overloaded constructor
         Player();
@@ -38,10 +39,11 @@ class Player : public Character {
         // Shop Functions
         int getCurrency();              // Return money
         void setCurrenct(int);          // Set currency
+
+        float useSpell();   // Magic attack function
         
         // We must override these functions from Abstract class
         float useAttack() override;  // If the entity can't perform this, return 0
-        float useSpell() override;   // If the entity can't perform this, return 0
 };
 
 #endif /* PLAYER_HPP */
