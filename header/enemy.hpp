@@ -22,7 +22,6 @@ class Enemy : public Character {
         
         // We must override these functions from Abstract class
         float useAttack() override;  // If the entity can't perform this, return 0
-        float useSpell() override;   // If the entity can't perform this, return 0
 };
 
 #endif /* ENEMY_HPP */

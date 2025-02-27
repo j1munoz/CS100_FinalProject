@@ -15,9 +15,3 @@ float Monster::useAttack() {
 
     return 0;
 }
-
-float Monster::useSpell() {
-    // Implement code here
-
-    return 0;
-}

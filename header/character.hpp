@@ -19,7 +19,6 @@ class Character {
         int defense;                // Defense stat
 
         Weapon currentWeapon;           // Current equipped item
-        std::vector<Spell> spellBook;   // List of spells to use
 	public:
         // Implement default and overloaded constructor
         Character();
@@ -31,7 +30,6 @@ class Character {
         // NOTE: These functions are vitual because each attack
         // will be implemented slighty differently among entities
         virtual float useAttack() = 0;  // Attack function
-        virtual float useSpell() = 0;   // Magic attack function
 
         int getMana();                  // Return mana
         void setMana(int);              // Set mana cost
