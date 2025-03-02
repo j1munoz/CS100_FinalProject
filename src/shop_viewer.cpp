@@ -13,12 +13,16 @@ void Shop_Viewer::displayItems(const std::vector<Item> &itemsForSale) {
 
     // Print shop items with name and price formatted
     cout << "-------------------------------------" << endl;
-    for(int i = 0; i < itemsForSale.size(); ++i) {
-        Item currentItem = itemsForSale[i];
-        cout << (i+1) << ". " << currentItem.getName() << std::setw(FORMATTING_LENGTH - currentItem.getName().length()) 
-             << "- $" << currentItem.getPrice() << endl;
+    if(itemsForSale.size() > 0) {
+        for(int i = 0; i < itemsForSale.size(); ++i) {
+            Item currentItem = itemsForSale[i];
+            cout << (i+1) << ". " << currentItem.getName() << std::setw(FORMATTING_LENGTH - currentItem.getName().length()) 
+                 << "- $" << currentItem.getPrice() << endl;
+        }
+    
+        cout << "\nQ. Quit" << endl;
+    } else {
+        cout << "There are no items to display at this moment." << endl;
     }
-
-    cout << "\nQ. Quit" << endl;
     cout << "-------------------------------------" << endl;
 }

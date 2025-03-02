@@ -10,12 +10,12 @@ class Shop {
 
                 // Private Helper Function
                 void removeItem(int);
-
         public:
-                // Implement default and overloaded constructor
+                Shop();
+                Shop(std::vector<Item> &);
 
-                Item purchaseItem(int);             // Pass index of item to purchase
-                void fillShop(std::vector<Item> &); // Pass array of items, choose random items to sell
+                Item purchaseItem(const int);        // Pass index of item to purchase
+                void fillShop(std::vector<Item> &);  // Pass array of items, choose random items to sell
 };
 
 #endif /* SHOP_HPP */

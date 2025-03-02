@@ -3,13 +3,23 @@
 
 #include "../header/shop.hpp"
 
+// Default Constructor
+Shop::Shop() {
+    // Nothing to implement
+}
+
+// Overloaded Constructor
+Shop::Shop(std::vector<Item> &everyItemInGame) {
+    fillShop(everyItemInGame);
+}
+
 void Shop::removeItem(int index) {
     itemsForSale.erase(itemsForSale.begin() + index - 1);
 }
 
 // Return bought item and call removeItem() function
 // Note: The player's money will be deducted in a different function
-Item Shop::purchaseItem(int index) {
+Item Shop::purchaseItem(const int index) {
     Item itemBought = itemsForSale[index-1];
     removeItem(index);
 
