@@ -15,7 +15,3 @@ float Weapon::getDmg() {
 
     return 0;
 }
-
-void Weapon::displayDescription() {
-    // Implement code here
-}

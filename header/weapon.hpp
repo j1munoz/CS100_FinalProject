@@ -13,9 +13,8 @@ public:
         Weapon();
         Weapon(string name, string rarity, float critChance, float dmg, int price);
 
+        float getCritChance() const;
         float getDmg() override;
-
-        void displayDescription() override; // Displays all stats of an item
 };
 
 #endif /* WEAPON_HPP */

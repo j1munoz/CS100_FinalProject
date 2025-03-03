@@ -23,7 +23,3 @@ void Item::setDmg(float amount) {
 int Item::getPrice() {
     return this->price;
 }
-
-void Item::displayDescription() {
-    // Implement code here
-}

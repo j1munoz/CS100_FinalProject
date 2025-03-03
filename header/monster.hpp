@@ -6,9 +6,9 @@
 using namespace std;
 
 class Monster : public Character {
-	private:
-		int lifetime;   // Lifetime of the summoned monster
-	public:
+        private:
+	int lifetime;   // Lifetime of the summoned monster
+        public:
         // Implement default and overloaded constructor
         Monster();
         Monster(string name, float health, int mana, int defense, int lifetime)
