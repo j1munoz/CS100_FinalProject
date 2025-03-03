@@ -2,10 +2,11 @@
 #define SPELL_VIEWER_HPP
 
 #include "item_viewer.hpp"
+#include "spell.hpp"
 
 class Spell_Viewer : public Item_Viewer {
     public:
-    void displayDescription() override; // Displays all stats of an item
+    void displayDescription(Spell& spell) const; // Displays all stats of an item
 };
 
 #endif /* SPELL_VIEWER_HPP */
