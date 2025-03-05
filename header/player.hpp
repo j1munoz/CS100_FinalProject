@@ -30,6 +30,10 @@ class Player : public Character {
         void setMonCount(int);          // Set monster count
         int getMaxMonCount();           // Get maximum monsters
         void setMaxMonCount(int);       // Set maximum monsters
+        int getInventorySize() const;   // Get the size of the current inventory
+        int getSpellBookSize() const;   // Get the size of the current spell book
+        Weapon getWeapon(const int& index);       // Get a weapon
+        Spell getSpell(const int& index);         // Get a spell
 
         // Skill Point Upgrades
         // We are missing some, but we will implement later
