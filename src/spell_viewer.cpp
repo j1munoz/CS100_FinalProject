@@ -16,6 +16,6 @@ void Spell_Viewer::displayDescription(Item& item) const {
     cout << "--------------------------------------\n";
     cout << setw(CENTER + NAME_LENGTH) << right << spell.getName() << endl;
     cout << setw(15) << left << "Dmg:" << spell.getDmg() << endl;
-    cout << setw(15) << left << "Cast Time:" << spell.getCastTime() << "Turns" << endl;
+    cout << setw(15) << left << "Cast Time:" << spell.getCastTime() << " Turns" << endl;
     cout << "--------------------------------------\n";
 }
