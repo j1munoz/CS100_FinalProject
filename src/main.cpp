@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../header/gamedata.hpp"
+#include "../header/gamemaster.hpp"
 #include "../header/player.hpp"
 #include "../header/character.hpp"
 #include "../header/enemy.hpp"
@@ -9,57 +10,25 @@
 
 using namespace std;
 
-void mainMenu() {
-    cout << "Welcome to A Villain's Revenge!" << endl << endl;
-    cout << "Please choose an option below:" << endl << endl;
-    cout << "-------------------------------------" << endl;
-    cout << "1. Battle" << endl;
-    cout << "-------------------------------------" << endl;
-    cout << "2. Shop" << endl;
-    cout << "-------------------------------------" << endl;
-    cout << "3. View Equipment" << endl;
-    cout << "-------------------------------------" << endl;
-    cout << "4. Quit" << endl;
-    cout << "-------------------------------------" << endl << endl;
-    cout << "Select your choice: ";
-}
-
-void battle() {
-    cout << "Battle" << endl;
-}
-
-void shop() {
-    cout << "View shop" << endl;
-}
-
-void viewInventory() {
-    cout << "View inventory" << endl;
-
-}
-
-// Error check the user input
-void fixBuffer() {
-    cin.clear();
-    cin.ignore(256, '\n');
-}
 
 int main() {
     int choice;     // Gets the user input
     Character *player = new Player;
+    GameMaster navigate;
 
     do {
-        mainMenu();
+        navigate.mainMenu();
         cin >> choice;
-        fixBuffer();
+        navigate.fixBuffer();
 
         if(choice == 1) {
-            battle();
+            navigate.battle();
         }
         else if(choice == 2) {
-            shop();
+            navigate.shop();
         }
         else if(choice == 3) {
-            viewInventory();
+            navigate.viewInventory();
         }
         else if(choice != 4) {
             cout << "That is not a valid command! Try again." << endl;
