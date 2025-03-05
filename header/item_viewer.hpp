@@ -5,7 +5,7 @@
 
 class Item_Viewer {
     public:
-    virtual void displayDescription(Item& item) = 0; // Displays all stats of an item
+    virtual void displayDescription(Item& item) const = 0; // Displays all stats of an item
 };
 
 #endif /* ITEM_VIEWER_HPP */

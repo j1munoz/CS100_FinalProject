@@ -6,7 +6,7 @@
 
 class Spell_Viewer : public Item_Viewer {
     public:
-    void displayDescription(Spell& spell) const; // Displays all stats of an item
+    void displayDescription(Item& item) const override; // Displays all stats of an item
 };
 
 #endif /* SPELL_VIEWER_HPP */

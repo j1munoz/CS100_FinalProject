@@ -1,10 +1,12 @@
 #include <iostream>
+#include "../header/gamedata.hpp"
+#include "../header/player.hpp"
 #include "../header/character.hpp"
 #include "../header/enemy.hpp"
-#include "../header/gamedata.hpp"
+#include "../header/item.hpp"
+#include "../header/weapon_viewer.hpp"
+#include "../header/spell_viewer.hpp"
 
-
-#include "../header/player.hpp"
 using namespace std;
 
 void mainMenu() {
@@ -32,6 +34,7 @@ void shop() {
 
 void viewInventory() {
     cout << "View inventory" << endl;
+
 }
 
 // Error check the user input

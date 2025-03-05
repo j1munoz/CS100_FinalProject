@@ -14,7 +14,6 @@ bool Weapon::rollCritChance() {
 }
 
 float Weapon::getDmg() {
-    // Implement code here
 
     return 0;
 }

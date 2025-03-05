@@ -4,9 +4,9 @@
 #include "item_viewer.hpp"
 #include "weapon.hpp"
 
-class Weapon_Viewer : public Item_Viewer{
+class Weapon_Viewer : public Item_Viewer {
     public:
-    void displayDescription(Weapon& weapon) const; // Displays all stats of an item
+    void displayDescription(Item& item) const override; // Displays all stats of an item
 };
 
 #endif /* WEAPON_VIEWER_HPP */
