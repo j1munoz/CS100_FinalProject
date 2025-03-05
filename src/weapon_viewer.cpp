@@ -1,4 +1,4 @@
-#include "weapon_viewer.hpp"
+#include "../header/weapon_viewer.hpp"
 #include <iostream>
 
 using std::cout;

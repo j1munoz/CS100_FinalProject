@@ -1,4 +1,4 @@
-#include "spell_viewer.hpp"
+#include "../header/spell_viewer.hpp"
 #include <iostream>
 
 using std::cout;
