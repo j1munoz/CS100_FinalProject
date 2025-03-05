@@ -2,6 +2,7 @@
 #define GAMEMASTER_HPP
 
 #include "gamedata.hpp"
+#include "player.hpp"
 
 class GameMaster {
     private:
@@ -12,9 +13,11 @@ class GameMaster {
         void battle();
         void shop();
         void viewInventory();
+        void viewInventoryMenu();
+        void equipItem();
         // Error check the user input
         void fixBuffer();
+        void outputError();
 };
 
 #endif /* GAMEMASTER.HPP */
-

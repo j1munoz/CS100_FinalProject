@@ -1,4 +1,10 @@
 #include "../header/player.hpp"
+#include "../header/spell_viewer.hpp"
+#include "../header/weapon_viewer.hpp"
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 Player::Player() {
     currency = 0;
@@ -19,11 +25,16 @@ void Player::equipItem(int index) {
 }
 
 void Player::showInventory() {
-    // Implement code here
+    cout << "\n--------------------------" << endl;
+    
+    for(int i = 0; i < inventory.size(); i++) {
+        cout << i + 1 << ". " << inventory[i].getName() << endl;
+    }
+    cout << "--------------------------" << endl << endl;
 }
 
 void Player::addItem(Weapon item) {
-    // Implement code here
+    inventory.push_back(item);
 }
 
 void Player::sellItem(int index) {
@@ -31,11 +42,15 @@ void Player::sellItem(int index) {
 }
 
 void Player::addSpell(Spell item) {
-    // Implement code here
+    spellBook.push_back(item);
 }
 
 void Player::showSpells() {
-    // Implement code here
+    cout << "\n--------------------------" << endl;
+    for(int i = 0; i < spellBook.size(); i++) {
+        cout << i + 1 << ". " << spellBook[i].getName() << endl;
+    }
+    cout << "--------------------------" << endl << endl;
 }
 
 bool Player::getCastingStatus() {
@@ -88,4 +103,20 @@ float Player::useSpell() {
     // Implement code here
 
     return 0;
+}
+
+int Player::getInventorySize() const {
+    return inventory.size();
+}
+
+int Player::getSpellBookSize() const {
+    return spellBook.size();
+}
+
+Weapon Player::getWeapon(const int& index) {
+    return inventory[index];
+}
+
+Spell Player::getSpell(const int& index) {
+    return spellBook[index];
 }

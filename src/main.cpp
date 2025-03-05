@@ -10,10 +10,13 @@
 
 using namespace std;
 
+void outputError() {
+    cout << "\nThat is not a valid command! Try again." << endl << endl;
+}
 
 int main() {
     int choice;     // Gets the user input
-    Character *player = new Player;
+    Player *player = new Player;
     GameMaster navigate;
 
     do {
@@ -31,7 +34,7 @@ int main() {
             navigate.viewInventory();
         }
         else if(choice != 4) {
-            cout << "That is not a valid command! Try again." << endl;
+            outputError();
         }
 
     } while (choice != 4 && player->isAlive());
