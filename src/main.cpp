@@ -14,15 +14,18 @@ using namespace std;
 int main() {
     int choice;     // Gets the user input
     Character *player = new Player;
+    Player user;
     GameMaster navigate;
 
+    cout << "\nWelcome to A Villain's Revenge!" << endl << endl;
+    
     do {
         navigate.mainMenu();
         cin >> choice;
         navigate.fixBuffer();
 
         if(choice == 1) {
-            navigate.battle();
+            navigate.battle(user);
         }
         else if(choice == 2) {
             navigate.shop();

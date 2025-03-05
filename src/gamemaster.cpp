@@ -1,17 +1,20 @@
 #include "../header/gamemaster.hpp"
 #include <iostream>
+#include <iomanip>
 
 using std::cout;
 using std::cin;
 using std::endl;
+using std::setw;
+using std::left;
+using std::right;
 
 const GameData& GameMaster::getData() {
     return data;
 }
 
 void GameMaster::mainMenu() {
-    cout << "Welcome to A Villain's Revenge!" << endl << endl;
-    cout << "Please choose an option below:" << endl << endl;
+    cout << "\nPlease choose an option below:" << endl << endl;
     cout << "-------------------------------------" << endl;
     cout << "1. Battle" << endl;
     cout << "-------------------------------------" << endl;
@@ -24,8 +27,16 @@ void GameMaster::mainMenu() {
     cout << "Select your choice: ";
 }
 
-void GameMaster::battle() {
-    cout << "Battle" << endl;
+void GameMaster::battle(Player &user) {
+    const int LENGTH = 36;
+    Enemy enemy;
+
+    cout << "\nBattle" << endl << endl;
+    cout << "Your Health" << setw(LENGTH * 2) << right << enemy.getName() << endl;
+    cout << "======================================" << setw(LENGTH + 10) << right << "======================================\n";
+    cout << setw(LENGTH / 2) << right; user.displayHealth(); 
+    cout << setw(LENGTH + 7) << right; enemy.displayHealth();  
+    cout << "\n======================================" << setw(LENGTH + 10) << right << "======================================\n";
 }
 
 void GameMaster::shop() {
