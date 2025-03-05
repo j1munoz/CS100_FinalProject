@@ -9,11 +9,9 @@ float Weapon::getCritChance() const {
 }
 bool Weapon::rollCritChance() {
     // Implement code here
-
     return false;
 }
 
 float Weapon::getDmg() {
-
-    return 0;
+    return Item::getDmg();
 }
