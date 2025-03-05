@@ -13,4 +13,6 @@ ADD_EXECUTABLE(villain_revenge
     src/gamedata.cpp
     src/player.cpp
     src/monster.cpp
+    src/shop.cpp
+    src/shop_viewer.cpp
 )
