@@ -22,8 +22,8 @@ class Character {
 	public:
         // Implement default and overloaded constructor
         Character();
-        Character(string name, float totalHealth, int mana, int defense)
-        : name(name), totalHealth(totalHealth), currentHealth(totalHealth), mana(mana), maxMana(mana), defense(defense) {}
+        Character(string name, float totalHealth, int mana, int defense, Weapon currentWeapon)
+        : name(name), totalHealth(totalHealth), currentHealth(totalHealth), mana(mana), maxMana(mana), defense(defense), currentWeapon(currentWeapon){}
         
 		bool isAlive();     // Tests if entity is alive
 

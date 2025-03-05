@@ -1,6 +1,6 @@
 #include "../header/enemy.hpp"
 
-Enemy::Enemy() : Character("Enigma", 999, 999, 999){}
+Enemy::Enemy() : Character("Enigma", 999, 999, 999, Weapon("Nothing", "N/A", 999, 999, 999)){}
 
 float Enemy::rollDrop() {
     // Implement code here
