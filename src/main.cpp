@@ -17,6 +17,7 @@ void outputError() {
 int main() {
     int choice;     // Gets the user input
     Player *player = new Player;
+    Player user;
     GameMaster navigate;
 
     cout << "\nWelcome to A Villain's Revenge!" << endl << endl;
