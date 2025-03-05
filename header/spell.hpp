@@ -15,8 +15,6 @@ public:
 
 	int getManaCost(); // Returns mana cost
 	int getCastTime(); // Returns cast time
-
-	void displayDescription() override; // Displays all stats of an item
 };
 
 #endif /* SPELL_HPP */

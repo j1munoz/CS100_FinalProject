@@ -21,8 +21,6 @@ public:
     virtual float getDmg(); // Calculates damage
     void setDmg(float);     // Sets damage
     int getPrice();         // Returns price
-
-    virtual void displayDescription(); // Displays all stats of an item
 };
 
 #endif /* ITEM_HPP */

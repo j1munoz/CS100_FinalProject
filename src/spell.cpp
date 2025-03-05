@@ -12,7 +12,3 @@ int Spell::getManaCost() {
 int Spell::getCastTime() {
     return this->castTime;
 }
-
-void Spell::displayDescription() {
-    // Implement code here
-}
