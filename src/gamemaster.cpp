@@ -5,6 +5,10 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+const GameData& GameMaster::getData() {
+    return data;
+}
+
 void GameMaster::mainMenu() {
     cout << "Welcome to A Villain's Revenge!" << endl << endl;
     cout << "Please choose an option below:" << endl << endl;
