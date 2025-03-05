@@ -11,8 +11,8 @@ class Monster : public Character {
         public:
         // Implement default and overloaded constructor
         Monster();
-        Monster(string name, float health, int mana, int defense, int lifetime)
-        : Character(name, health, mana, defense), lifetime(lifetime) {}
+        Monster(string name, float health, int mana, int defense, int lifetime, Weapon currentWeapon)
+        : Character(name, health, mana, defense, currentWeapon), lifetime(lifetime) {}
 
         int getLifetime();      // Return lifetime
         void setLifetime(int);   // Sets the lifetime

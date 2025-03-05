@@ -15,8 +15,8 @@ class Enemy : public Character {
 	public:
         // Implement default and overloaded constructor
         Enemy();
-        Enemy(string name, float health, int mana, int defense)
-        : Character(name, health, mana, defense) {}
+        Enemy(string name, float health, int mana, int defense, Weapon currentWeapon)
+        : Character(name, health, mana, defense, currentWeapon) {}
 
         Item dropItem();    // Returns the dropped loot (if applicable)
         
