@@ -10,7 +10,7 @@ class GameMaster {
     public:
         const GameData& getData();
         void mainMenu();
-        void battle();
+        void battle(Player &user);
         void shop();
         void viewInventory();
         void viewInventoryMenu();

@@ -7,7 +7,7 @@ using namespace std;
 
 class Enemy : public Character {
 	private:
-		Item loot;
+	Item loot;
         float dropChance;
 
         // Private Helper Function
