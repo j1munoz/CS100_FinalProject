@@ -16,4 +16,5 @@ ADD_EXECUTABLE(villain_revenge
     src/monster.cpp
     src/shop.cpp
     src/shop_viewer.cpp
+    src/upgradesystem.cpp
 )
