@@ -77,14 +77,6 @@ void Player::setMaxMonCount(int amount) {
     this->maxMonsterCount = amount;
 }
 
-void Player::increaseHealth(float amount) {
-    this->setTotalHealth(amount);
-}
-
-void Player::increaseDef(int amount) {
-    this->setDefense(amount);
-}
-
 int Player::getCurrency() {
     return this->currency;
 }

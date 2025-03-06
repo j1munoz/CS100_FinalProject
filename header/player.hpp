@@ -35,11 +35,6 @@ class Player : public Character {
         Weapon getWeapon(const int& index);       // Get a weapon
         Spell getSpell(const int& index);         // Get a spell
 
-        // Skill Point Upgrades
-        // We are missing some, but we will implement later
-        void increaseHealth(float);     // Increase maximum health
-        void increaseDef(int);          // Increase defense
-
         // Shop Functions
         int getCurrency();              // Return money
         void setCurrenct(int);          // Set currency
