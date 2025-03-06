@@ -16,8 +16,6 @@ void outputError() {
 
 int main() {
     int choice;     // Gets the user input
-    Player *player = new Player;
-    Player user;
     GameMaster navigate;
 
     cout << "\nWelcome to A Villain's Revenge!" << endl << endl;
@@ -28,7 +26,7 @@ int main() {
         navigate.fixBuffer();
 
         if(choice == 1) {
-            navigate.battle(user);
+            navigate.battle();
         }
         else if(choice == 2) {
             navigate.shop();
@@ -40,10 +38,7 @@ int main() {
             outputError();
         }
 
-    } while (choice != 4 && player->isAlive());
-    
-    // Delete dynamically created objects/variables
-    delete player;
+    } while (choice != 4 && navigate.getData().getPlayer().isAlive());
 
     return 0;
 }

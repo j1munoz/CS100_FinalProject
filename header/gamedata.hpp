@@ -26,7 +26,7 @@ public:
         int getLvlCount();
         void setLvlCount(int);
         Shop getShop();
-        Player getPlayer();
+        Player& getPlayer();
         void setPlayer(Player);
 };
 

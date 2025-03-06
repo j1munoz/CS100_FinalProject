@@ -8,9 +8,9 @@ class GameMaster {
     private:
         GameData data;
     public:
-        const GameData& getData();
+        GameData& getData();
         void mainMenu();
-        void battle(Player &user);
+        void battle();
         void shop();
         void viewInventory();
         void viewInventoryMenu();

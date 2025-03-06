@@ -12,7 +12,7 @@ using std::setw;
 using std::left;
 using std::right;
 
-const GameData& GameMaster::getData() {
+GameData& GameMaster::getData() {
     return data;
 }
 
@@ -30,14 +30,15 @@ void GameMaster::mainMenu() {
     cout << "Select your choice: ";
 }
 
-void GameMaster::battle(Player &user) {
+void GameMaster::battle() {
     const int LENGTH = 36;
     Enemy enemy;
+    Player player = data.getPlayer();
 
     cout << "\nBattle" << endl << endl;
     cout << "Your Health" << setw(LENGTH * 2) << right << enemy.getName() << endl;
     cout << "======================================" << setw(LENGTH + 10) << right << "======================================\n";
-    cout << setw(LENGTH / 2) << right; user.displayHealth(); 
+    cout << setw(LENGTH / 2) << right; player.displayHealth(); 
     cout << setw(LENGTH + 7) << right; enemy.displayHealth();  
     cout << "\n======================================" << setw(LENGTH + 10) << right << "======================================\n";
 }
@@ -50,6 +51,7 @@ void GameMaster::viewInventory() {
     int inventoryChoice;
     Player player;
     player = data.getPlayer();
+
     do {
         viewInventoryMenu();
         cin >> inventoryChoice;
