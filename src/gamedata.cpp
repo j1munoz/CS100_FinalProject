@@ -52,7 +52,7 @@ Shop GameData::getShop() {
     return this->theShop;
 }
 
-Player GameData::getPlayer() {
+Player& GameData::getPlayer() {
     return this->user;
 }
 
