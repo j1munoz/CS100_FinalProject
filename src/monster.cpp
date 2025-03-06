@@ -11,7 +11,14 @@ void Monster::setLifetime(int amount) {
 }
 
 float Monster::useAttack() {
-    // Implement code here
+    if(currentWeapon.rollCritChance()) {
+        return currentWeapon.getDmg() * 2; //Currently crits do 2x of weapons base damage
+    }
+    else {
+        return currentWeapon.getDmg();
+    }
+
+    return 0;
 
     return 0;
 }
