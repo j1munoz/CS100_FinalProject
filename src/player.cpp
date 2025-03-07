@@ -18,6 +18,7 @@ Player::Player() {
     currentHealth = 50;
     mana = 20;
     defense = 10;
+    currentWeapon = Weapon("Stick", "Common", 1, 5, 0);
 }
 
 void Player::equipItem(int index) {
