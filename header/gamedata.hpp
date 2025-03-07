@@ -11,8 +11,8 @@
 
 class GameData {
 private:
-        std::vector<Weapon> weaponList;
-        std::vector<Spell> spellList;
+        std::vector<Item> weaponList;
+        std::vector<Item> spellList;
         std::vector<Enemy> enemyList;
         std::vector<Monster> monsterList;
 
@@ -25,7 +25,7 @@ public:
 
         int getLvlCount();
         void setLvlCount(int);
-        Shop getShop();
+        Shop& getShop();
         Player& getPlayer();
         void setPlayer(Player);
 };
