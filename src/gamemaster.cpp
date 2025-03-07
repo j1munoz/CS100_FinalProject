@@ -12,6 +12,25 @@ using std::setw;
 using std::left;
 using std::right;
 
+// Generic helper function to display player choices
+void displayChoiceMenu() {
+    cout << "\n--------------------------------------\n";
+    cout << "1. Fight" << endl;
+    cout << "2. View Inventory" << endl;
+    cout << "3. Run";
+    cout << "\n--------------------------------------\n\n";
+}
+
+// Generic helper function to display attack menu
+void displayAttackMenu() {
+    cout << "How will you fight?" << endl;
+    cout << "\n--------------------------------------\n";
+    cout << "1. Physical Attack" << endl;
+    cout << "2. Spell" << endl;
+    cout << "3. Go Back";
+    cout << "\n--------------------------------------\n\n";
+}
+
 GameData& GameMaster::getData() {
     return data;
 }
@@ -32,15 +51,65 @@ void GameMaster::mainMenu() {
 
 void GameMaster::battle() {
     const int LENGTH = 36;
+
     Enemy enemy;
-    Player player = data.getPlayer();
+
+    // We pass by reference so we can edit the actual values of Player
+    Player &player = data.getPlayer();
 
     cout << "\nBattle" << endl << endl;
+
+    // do while loop here...
     cout << "Your Health" << setw(LENGTH * 2) << right << enemy.getName() << endl;
     cout << "======================================" << setw(LENGTH + 10) << right << "======================================\n";
     cout << setw(LENGTH / 2) << right; player.displayHealth(); 
     cout << setw(LENGTH + 7) << right; enemy.displayHealth();  
     cout << "\n======================================" << setw(LENGTH + 10) << right << "======================================\n";
+
+    do {
+        int userMenuChoice;
+        displayChoiceMenu();
+    
+        cout << "Select your choice: ";
+        cin >> userMenuChoice;
+        fixBuffer();  // Filter out junk input
+
+        if(userMenuChoice == 1) {
+            // Attack here
+            do {
+                int userAttackChoice;
+                displayAttackMenu();
+    
+                cout << "Select your attack: ";
+                cin >> userAttackChoice;
+                fixBuffer();
+    
+                if(userAttackChoice == 1) {
+                    // Implement physical attack here
+                    break;
+                } else if(userAttackChoice == 2) {
+                    // Implement spell here
+                    break;
+                } else if(userAttackChoice == 3) {
+                    // Go back to menu choices
+                    break;
+                } else {
+                    // Invalid input
+                    cout << "\nThat is not a valid command! Try again." << endl;
+                }
+            } while(true);
+        } else if(userMenuChoice == 2) {
+            // View inventory here
+            viewInventory();
+        } else if(userMenuChoice == 3) {
+            // Running away
+            cout << "You have run away from the battle. Returning back to Main Menu..." << endl;
+            break;
+        } else {
+            // Invalid input
+            cout << "\nThat is not a valid command! Try again." << endl << endl;
+        }
+    } while(true);
 }
 
 void GameMaster::shop() {
