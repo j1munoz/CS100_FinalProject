@@ -38,6 +38,8 @@ GameData::GameData(): levelCount(1) {
         Monster("Skeleton", 30, 10, 10, 5, Weapon("Bone Knife", "Uncommon", 2, 25, 100)),
         Monster("Golem", 80, 25, 30, 5, Weapon("Sandstone Gauntlets", "Rare", 3, 40, 200))
     };
+
+    theShop.fillShop(weaponList);
 }
 
 int GameData::getLvlCount() {
@@ -48,7 +50,7 @@ void GameData::setLvlCount(int amount) {
     this->levelCount = amount;
 }
 
-Shop GameData::getShop() {
+Shop& GameData::getShop() {
     return this->theShop;
 }
 
