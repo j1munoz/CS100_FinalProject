@@ -37,7 +37,7 @@ class Player : public Character {
 
         // Shop Functions
         int getCurrency();              // Return money
-        void setCurrenct(int);          // Set currency
+        void setCurrency(int);          // Set currency
 
         float useSpell();   // Magic attack function
         

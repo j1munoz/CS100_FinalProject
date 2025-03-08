@@ -58,3 +58,7 @@ float Character::getTotalHealth() {
 void Character::displayHealth() {
     cout << getHealth() << "/" << getTotalHealth();
 }
+
+Weapon Character::getCurrentWeapon() {
+    return currentWeapon;
+}
