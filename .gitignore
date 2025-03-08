@@ -7,13 +7,6 @@ CMakeCache.txt
 .vscode/
 lib/
 bin/
-test/CMakeFiles
-test/Makefile
-test/CMakeCache.txt
-test/cmake_install.cmake
-test/lib/
-test/bin/
-src/CMakeFiles/
-src/cmake_install.cmake
-src/libsimpleLibrary.a
-src/Makefile
+googletest-build
+googletest-download
+googletest-src
