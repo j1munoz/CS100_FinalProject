@@ -19,12 +19,9 @@ Item Enemy::dropItem() {
 float Enemy::useAttack() {
     if(currentWeapon.rollCritChance()) {
         return currentWeapon.getDmg() * 2; //Currently crits do 2x of weapons base damage
-    }
-    else {
+    } else {
         return currentWeapon.getDmg();
     }
-
-    return 0;
 
     return 0;
 }
