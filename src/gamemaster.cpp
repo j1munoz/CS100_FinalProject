@@ -52,21 +52,26 @@ void GameMaster::mainMenu() {
 void GameMaster::battle() {
     const int LENGTH = 36;
 
-    Enemy enemy;
+    // Temporary enemy place holder
+    // Implement enemy generation here ------------------------------------------------------------------
+    Enemy enemy("Training Dummy", 50, 0, 5, Weapon("Stick Arm", "Common", 1, 5, 0));
 
     // We pass by reference so we can edit the actual values of Player
     Player &player = data.getPlayer();
 
     cout << "\nBattle" << endl << endl;
-
-    // do while loop here...
-    cout << "Your Health" << setw(LENGTH * 2) << right << enemy.getName() << endl;
-    cout << "======================================" << setw(LENGTH + 10) << right << "======================================\n";
-    cout << setw(LENGTH / 2) << right; player.displayHealth(); 
-    cout << setw(LENGTH + 7) << right; enemy.displayHealth();  
-    cout << "\n======================================" << setw(LENGTH + 10) << right << "======================================\n";
+    int turnCount = 0;
 
     do {
+        turnCount++;
+        cout << "Turn " << turnCount << endl << endl;
+
+        cout << "Your Health" << setw(LENGTH * 2) << right << enemy.getName() << endl;
+        cout << "======================================" << setw(LENGTH + 10) << right << "======================================\n";
+        cout << setw(LENGTH / 2) << right; player.displayHealth(); 
+        cout << setw(LENGTH + 7) << right; enemy.displayHealth();  
+        cout << "\n======================================" << setw(LENGTH + 10) << right << "======================================\n";
+
         int userMenuChoice;
         displayChoiceMenu();
     
@@ -85,17 +90,34 @@ void GameMaster::battle() {
                 fixBuffer();
     
                 if(userAttackChoice == 1) {
-                    // Implement physical attack here
+                    // Calculate damage done
+                    float dmgValue = player.useAttack() - enemy.getDefense();
+                    float dmgDone = (dmgValue > 0) ? dmgValue : 0;
+
+                    float healthValue = enemy.getHealth() - dmgDone;
+                    float remainingHealth = (healthValue > 0) ? healthValue : 0;
+
+                    enemy.setHealth(remainingHealth);
+
+                    // Display damage done (critical hit or not)
+                    if(dmgValue + enemy.getDefense() == player.getCurrentWeapon().getDmg()*2) {
+                        cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << "* DMG! (Critical HIT)" << endl;
+                    } else {
+                        cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
+                    }
+
+                    // Insert enemy attack here ------------------------------------------------------------------
+
                     break;
                 } else if(userAttackChoice == 2) {
-                    // Implement spell here
+                    // Implement spell here ------------------------------------------------------------------
                     break;
                 } else if(userAttackChoice == 3) {
                     // Go back to menu choices
                     break;
                 } else {
                     // Invalid input
-                    cout << "\nThat is not a valid command! Try again." << endl;
+                    outputError();
                 }
             } while(true);
         } else if(userMenuChoice == 2) {
@@ -107,9 +129,28 @@ void GameMaster::battle() {
             break;
         } else {
             // Invalid input
-            cout << "\nThat is not a valid command! Try again." << endl << endl;
+            outputError();
         }
-    } while(true);
+    } while(player.isAlive() && enemy.isAlive());
+
+    if(!enemy.isAlive()) {
+        cout << "Congratulations! You have successfully won the battle against " << enemy.getName() << "!" << endl;
+
+        // Drop enemy loot ------------------------------------------------------------------
+
+        // Get cash reward
+        int cashPrize = rand() % 500;
+        player.setCurrency(cashPrize + player.getCurrency());
+        cout << "You have recieved $" << cashPrize << " for your efforts!" << endl;
+
+        cout << "Returning to Main Menu..." << endl;
+    }
+
+    // Reset player values
+    player.setHealth(player.getTotalHealth());
+    player.setMana(player.getMaxMana());
+    player.setCastingStatus(false);
+    player.setMonCount(0);
 }
 
 void GameMaster::shop() {

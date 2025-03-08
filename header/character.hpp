@@ -40,6 +40,7 @@ class Character {
         void setTotalHealth(float);     // Set max health
         float getTotalHealth();         // Get max heatlh
         void displayHealth();           // Display health bar + mana
+        Weapon getCurrentWeapon();      // Return currently held weapon
 };
 
 #endif /* CHARACTER_HPP */
