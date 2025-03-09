@@ -24,7 +24,7 @@ Player::Player() {
 }
 
 void Player::equipItem(int index) {
-    // Implement code here
+    currentWeapon = inventory[index];
 }
 
 void Player::showInventory() {
@@ -38,6 +38,10 @@ void Player::showInventory() {
 
 void Player::addItem(Weapon item) {
     inventory.push_back(item);
+}
+
+void Player::removeItem(int index) {
+    inventory.erase(inventory.begin() + index);
 }
 
 void Player::sellItem(int index) {

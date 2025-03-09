@@ -350,7 +350,49 @@ void GameMaster::viewInventoryMenu() {
 }
 
 void GameMaster::equipItem() {
-    cout << "Equip item" << endl;
+    Player &player = data.getPlayer();
+    if(player.getInventorySize() == 0) {
+        cout << "Your inventory is empty, nothing to equip." << endl;
+        return;
+    }
+    else {
+        // Display inventory
+        cout << "Your Weapons:" << endl;
+        player.showInventory(); // Show available weapons
+
+        int choice;
+        cout << "Select the number of the weapon to equip (or 0 to cancel): ";
+        cin >> choice;
+        fixBuffer();
+
+        // Validate input
+        if (choice < 0 || choice > player.getInventorySize()) {
+            cout << "Invalid choice! Try again." << endl;
+            return;
+        }
+        
+        if (choice == 0) {
+            cout << "Equip action canceled." << endl;
+            return;
+        }
+
+        int weaponIndex = choice - 1;
+    
+        // Get current weapon
+        Weapon oldWeapon = player.getCurrentWeapon();
+
+        // Equip the new weapon
+        player.equipItem(weaponIndex);
+
+        // Remove the new weapon from inventory
+        player.removeItem(choice - 1);
+
+        // Add the old weapon back into the inventory
+        player.addItem(oldWeapon);
+
+        cout << "You have equipped " << player.getCurrentWeapon().getName() << "!" << endl;
+
+    }
 }
 
 // Error check the user input
