@@ -375,14 +375,12 @@ void GameMaster::equipItem() {
             cout << "Equip action canceled." << endl;
             return;
         }
-
-        int weaponIndex = choice - 1;
     
         // Get current weapon
         Weapon oldWeapon = player.getCurrentWeapon();
 
         // Equip the new weapon
-        player.equipItem(weaponIndex);
+        player.equipItem(choice - 1);
 
         // Remove the new weapon from inventory
         player.removeItem(choice - 1);
