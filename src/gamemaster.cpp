@@ -54,7 +54,7 @@ void GameMaster::battle() {
 
     // Temporary enemy place holder
     // Implement enemy generation here ------------------------------------------------------------------
-    Enemy enemy("Training Dummy", 50, 0, 5, Weapon("Stick Arm", "Common", 1, 5, 0), 75);
+    Enemy enemy("Training Dummy", 50, 0, 5, Weapon("Stick Arm", "Common", 1, 11, 0), 75);
 
     // We pass by reference so we can edit the actual values of Player
     Player &player = data.getPlayer();
@@ -100,13 +100,30 @@ void GameMaster::battle() {
                     enemy.setHealth(remainingHealth);
 
                     // Display damage done (critical hit or not)
+                    cout << endl;
                     if(dmgValue + enemy.getDefense() == player.getCurrentWeapon().getDmg()*2) {
                         cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << "* DMG! (Critical HIT)" << endl;
                     } else {
                         cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
                     }
 
-                    // Insert enemy attack here ------------------------------------------------------------------
+                    // Enemy attacks back
+                    if(enemy.isAlive()) {
+                        float dmgValue = enemy.useAttack() - player.getDefense();
+                        float dmgDone = (dmgValue > 0) ? dmgValue : 0;
+
+                        float healthValue = player.getHealth() - dmgDone;
+                        float remainingHealth = (healthValue > 0) ? healthValue : 0;
+
+                        player.setHealth(remainingHealth);
+
+                        // Display damage done (critical hit or not)
+                        if(dmgValue + player.getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
+                            cout << enemy.getName() << " attacks YOU for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
+                        } else {
+                            cout << enemy.getName() << " attacks YOU for " << dmgDone << " DMG!" << endl << endl;
+                        }
+                    }
 
                     break;
                 } else if(userAttackChoice == 2) {
@@ -133,6 +150,7 @@ void GameMaster::battle() {
         }
     } while(player.isAlive() && enemy.isAlive());
 
+    // If the player wins
     if(!enemy.isAlive()) {
         cout << "Congratulations! You have successfully won the battle against " << enemy.getName() << "!" << endl;
 
@@ -148,6 +166,11 @@ void GameMaster::battle() {
         cout << "You have recieved $" << cashPrize << " for your efforts!" << endl;
 
         cout << "Returning to Main Menu..." << endl;
+
+    // If the player loses
+    } else if(!player.isAlive()) {
+        cout << "Uh oh! You have been defeated by " << enemy.getName() << ". You have lost everything and all progress." << endl;
+        cout << "\nReturning to Main Menu..." << endl;
     }
 
     // Reset player values
