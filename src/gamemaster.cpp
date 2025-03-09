@@ -164,6 +164,7 @@ void GameMaster::battle() {
                                 player.setCastingStatus(true);
                                 playerTurnActive = false;
 
+                                delete spellInfo;
                                 spellInfo = new SpellInfo(1, player.getSpell(spellChoice - 1));
                             } else {
                                 cout << "\nYou don't have enough mana to use this spell!" << endl;
