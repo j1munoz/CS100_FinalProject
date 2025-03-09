@@ -8,6 +8,7 @@ Weapon::Weapon(string name, string rarity, float critChance, float dmg, int pric
 float Weapon::getCritChance() const {
     return critChance;
 }
+
 bool Weapon::rollCritChance() {
     srand((time(0)));
 

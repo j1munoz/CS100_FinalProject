@@ -1,19 +1,17 @@
 #include "../header/enemy.hpp"
 
-Enemy::Enemy() : Character("Enigma", 999, 999, 999, Weapon("Nothing", "N/A", 999, 999, 999)){}
+Enemy::Enemy() : Character("Enigma", 999, 999, 999, Weapon("Nothing", "N/A", 999, 999, 999)), dropChance(999) {}
 
 float Enemy::rollDrop() {
-    // Implement code here
-
-    return 0;
+    return rand() % 100;
 }
 
-Item Enemy::dropItem() {
-    // Implement code here
-    // You will call rollDrop here to see if an Item will drop
-
-    Item temp;
-    return temp;
+bool Enemy::dropItem() {
+    if (rollDrop() <= dropChance) {
+        return true;  // Get enemy's weapon
+    } else {
+        return false; // Get nothing
+    }
 }
 
 float Enemy::useAttack() {

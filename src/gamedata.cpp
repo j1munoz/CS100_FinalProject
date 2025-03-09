@@ -25,10 +25,10 @@ GameData::GameData(): levelCount(1) {
 
     enemyList = {
         //Format is as follows for hardcoding enemies:
-        //| Name | Health | Mana | Defense | Weapon |
-        Enemy("Peasent", 10, 0, 2, Weapon("Pitchfork", "Common", 1, 15, 50)),
-        Enemy("Adventurer", 30, 10, 10, Weapon("Scimitar", "Uncommon", 2, 25, 100)),
-        Enemy("Knight", 80, 25, 30, Weapon("Crusader Hammer", "Rare", 3, 40, 200))
+        //| Name | Health | Mana | Defense | Weapon | Drop Chance
+        Enemy("Peasent", 10, 0, 2, Weapon("Pitchfork", "Common", 10, 15, 50), 50),
+        Enemy("Adventurer", 30, 10, 10, Weapon("Scimitar", "Uncommon", 20, 25, 100), 25),
+        Enemy("Knight", 80, 25, 30, Weapon("Crusader Hammer", "Rare", 15, 40, 200), 15)
     };
   
     monsterList = {

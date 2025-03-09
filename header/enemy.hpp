@@ -7,7 +7,6 @@ using namespace std;
 
 class Enemy : public Character {
 	private:
-	Item loot;
         float dropChance;
 
         // Private Helper Function
@@ -15,10 +14,10 @@ class Enemy : public Character {
 	public:
         // Implement default and overloaded constructor
         Enemy();
-        Enemy(string name, float health, int mana, int defense, Weapon currentWeapon)
-        : Character(name, health, mana, defense, currentWeapon) {}
+        Enemy(string name, float health, int mana, int defense, Weapon currentWeapon, float dropChance)
+        : Character(name, health, mana, defense, currentWeapon), dropChance(dropChance) {}
 
-        Item dropItem();    // Returns the dropped loot (if applicable)
+        bool dropItem();    // Returns the dropped loot (if applicable)
         
         // We must override these functions from Abstract class
         float useAttack() override;  // If the entity can't perform this, return 0
