@@ -38,8 +38,6 @@ class Player : public Character {
         // Shop Functions
         int getCurrency();              // Return money
         void setCurrency(int);          // Set currency
-
-        float useSpell();   // Magic attack function
         
         // We must override these functions from Abstract class
         float useAttack() override;  // If the entity can't perform this, return 0
