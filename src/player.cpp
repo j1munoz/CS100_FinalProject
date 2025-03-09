@@ -11,14 +11,16 @@ Player::Player() {
     skillPoints = 0;
     monsterCount = 0;
     maxMonsterCount = 0;
-    maxMana = 0;
+    maxMana = 100;
     isCasting = false;
     name = "Villain";
     totalHealth = 50;
     currentHealth = 50;
-    mana = 20;
+    mana = 100;
     defense = 10;
     currentWeapon = Weapon("Stick", "Common", 10, 15, 0);
+
+    spellBook.push_back(Spell("Hocus Pocus", "Common", 20, 25, 2, 50));
 }
 
 void Player::equipItem(int index) {
@@ -93,12 +95,6 @@ float Player::useAttack() {
     else {
         return currentWeapon.getDmg();
     }
-
-    return 0;
-}
-
-float Player::useSpell() {
-    // Implement code here
 
     return 0;
 }

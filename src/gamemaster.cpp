@@ -12,6 +12,13 @@ using std::setw;
 using std::left;
 using std::right;
 
+struct SpellInfo {
+    SpellInfo(int time, Spell spell) : timeElapsed(time), spell(spell) {}
+
+    int timeElapsed;
+    Spell spell;
+};
+
 // Generic helper function to display player choices
 void displayChoiceMenu() {
     cout << "\n--------------------------------------\n";
@@ -51,6 +58,9 @@ void GameMaster::mainMenu() {
 
 void GameMaster::battle() {
     const int LENGTH = 36;
+    const int MANA_REGEN = 10;
+
+    SpellInfo *spellInfo = nullptr;
 
     // Temporary enemy place holder
     // Implement enemy generation here ------------------------------------------------------------------
@@ -60,10 +70,9 @@ void GameMaster::battle() {
     Player &player = data.getPlayer();
 
     cout << "\nBattle" << endl << endl;
-    int turnCount = 0;
+    int turnCount = 1;
 
     do {
-        turnCount++;
         cout << "Turn " << turnCount << endl << endl;
 
         cout << "Your Health" << setw(LENGTH * 2) << right << enemy.getName() << endl;
@@ -79,7 +88,31 @@ void GameMaster::battle() {
         cin >> userMenuChoice;
         fixBuffer();  // Filter out junk input
 
-        if(userMenuChoice == 1) {
+        bool playerTurnActive = true; // Whether player has gone or not
+        
+        if(player.getCastingStatus()) {
+            if(spellInfo->timeElapsed == spellInfo->spell.getCastTime()) {
+                player.setCastingStatus(false);
+                
+                // Calculate damage done
+                float dmgValue = spellInfo->spell.getDmg() - enemy.getDefense();
+                float dmgDone = (dmgValue > 0) ? dmgValue : 0;
+
+                float healthValue = enemy.getHealth() - dmgDone;
+                float remainingHealth = (healthValue > 0) ? healthValue : 0;
+
+                enemy.setHealth(remainingHealth);
+
+                cout << endl;
+                cout << "You casted " << spellInfo->spell.getName() << " on " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
+            } else {
+                cout << "You are casting " << spellInfo->spell.getName() 
+                << " (" << spellInfo->timeElapsed << "/" << spellInfo->spell.getCastTime() << ")" << endl;
+
+                spellInfo->timeElapsed++;
+            }
+            playerTurnActive = false;
+        } else if(userMenuChoice == 1) {
             // Attack here
             do {
                 int userAttackChoice;
@@ -107,27 +140,39 @@ void GameMaster::battle() {
                         cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
                     }
 
-                    // Enemy attacks back
-                    if(enemy.isAlive()) {
-                        float dmgValue = enemy.useAttack() - player.getDefense();
-                        float dmgDone = (dmgValue > 0) ? dmgValue : 0;
-
-                        float healthValue = player.getHealth() - dmgDone;
-                        float remainingHealth = (healthValue > 0) ? healthValue : 0;
-
-                        player.setHealth(remainingHealth);
-
-                        // Display damage done (critical hit or not)
-                        if(dmgValue + player.getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
-                            cout << enemy.getName() << " attacks YOU for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
-                        } else {
-                            cout << enemy.getName() << " attacks YOU for " << dmgDone << " DMG!" << endl << endl;
-                        }
-                    }
-
+                    playerTurnActive = false;
                     break;
                 } else if(userAttackChoice == 2) {
-                    // Implement spell here ------------------------------------------------------------------
+                    // Cast a Spell
+                    do {
+                        cout << "What Spell would you like to cast?" << endl;
+                        player.showSpells();
+                        
+                        int spellChoice;
+                        cout << "Select your choice: ";
+                        cin >> spellChoice;
+                        fixBuffer();
+
+                        // If valid choice
+                        if(spellChoice > 0 && spellChoice <= player.getSpellBookSize()) {
+                            // If the player has enough mana
+                            if(player.getMana() >= player.getSpell(spellChoice-1).getManaCost()) {
+                                int manaValue = player.getMana() - player.getSpell(spellChoice-1).getManaCost();
+                                int remainingMana = (manaValue > 0) ? manaValue : 0;
+
+                                player.setMana(remainingMana);
+                                player.setCastingStatus(true);
+                                playerTurnActive = false;
+
+                                spellInfo = new SpellInfo(1, player.getSpell(spellChoice - 1));
+                            } else {
+                                cout << "\nYou don't have enough mana to use this spell!" << endl;
+                            }
+                            break;
+                        } else {
+                            outputError();
+                        }
+                    } while(true);
                     break;
                 } else if(userAttackChoice == 3) {
                     // Go back to menu choices
@@ -148,11 +193,38 @@ void GameMaster::battle() {
             // Invalid input
             outputError();
         }
+
+        // Enemy attacks back
+        if(enemy.isAlive() && playerTurnActive == false) {
+            float dmgValue = enemy.useAttack() - player.getDefense();
+            float dmgDone = (dmgValue > 0) ? dmgValue : 0;
+
+            float healthValue = player.getHealth() - dmgDone;
+            float remainingHealth = (healthValue > 0) ? healthValue : 0;
+
+            player.setHealth(remainingHealth);
+
+            // Display damage done (critical hit or not)
+            if(dmgValue + player.getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
+                cout << enemy.getName() << " attacks YOU for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
+            } else {
+                cout << enemy.getName() << " attacks YOU for " << dmgDone << " DMG!" << endl << endl;
+            }
+
+            turnCount++;
+
+            // Add mana per turn
+            if(player.getMana() + MANA_REGEN > player.getMaxMana()) {
+                player.setMana(player.getMaxMana());
+            } else {
+                player.setMana(player.getMana() + MANA_REGEN);
+            }
+        }
     } while(player.isAlive() && enemy.isAlive());
 
     // If the player wins
     if(!enemy.isAlive()) {
-        cout << "Congratulations! You have successfully won the battle against " << enemy.getName() << "!" << endl;
+        cout << "\nCongratulations! You have successfully won the battle against " << enemy.getName() << "!" << endl;
 
         // Drop enemy loot
         if(enemy.dropItem()) {
@@ -165,11 +237,11 @@ void GameMaster::battle() {
         player.setCurrency(cashPrize + player.getCurrency());
         cout << "You have recieved $" << cashPrize << " for your efforts!" << endl;
 
-        cout << "Returning to Main Menu..." << endl;
+        cout << "\nReturning to Main Menu..." << endl;
 
     // If the player loses
     } else if(!player.isAlive()) {
-        cout << "Uh oh! You have been defeated by " << enemy.getName() << ". You have lost everything and all progress." << endl;
+        cout << "\nUh oh! You have been defeated by " << enemy.getName() << ". You have lost everything and all progress." << endl;
         cout << "\nReturning to Main Menu..." << endl;
     }
 
@@ -178,6 +250,8 @@ void GameMaster::battle() {
     player.setMana(player.getMaxMana());
     player.setCastingStatus(false);
     player.setMonCount(0);
+
+    delete spellInfo;
 }
 
 void GameMaster::shop() {
