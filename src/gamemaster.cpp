@@ -54,7 +54,7 @@ void GameMaster::battle() {
 
     // Temporary enemy place holder
     // Implement enemy generation here ------------------------------------------------------------------
-    Enemy enemy("Training Dummy", 50, 0, 5, Weapon("Stick Arm", "Common", 1, 5, 0));
+    Enemy enemy("Training Dummy", 50, 0, 5, Weapon("Stick Arm", "Common", 1, 5, 0), 75);
 
     // We pass by reference so we can edit the actual values of Player
     Player &player = data.getPlayer();
@@ -136,7 +136,11 @@ void GameMaster::battle() {
     if(!enemy.isAlive()) {
         cout << "Congratulations! You have successfully won the battle against " << enemy.getName() << "!" << endl;
 
-        // Drop enemy loot ------------------------------------------------------------------
+        // Drop enemy loot
+        if(enemy.dropItem()) {
+            cout << "You have received the following item: " << enemy.getCurrentWeapon().getName() << endl;
+            player.addItem(enemy.getCurrentWeapon());
+        }
 
         // Get cash reward
         int cashPrize = rand() % 500;
