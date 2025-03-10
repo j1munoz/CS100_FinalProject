@@ -257,7 +257,6 @@ void GameMaster::battle() {
 
         // Enemy attacks back
         if(enemy.isAlive() && playerTurnActive == false) {
-            cout << "This is how many monsters player has: " << player.getMonCount() << endl;
             int enemyTarget = player.getMonCount() != 0 ? (rand() % player.getMonCount()) + 1 : 1;
 
             // Enemy attacks player; else minion
