@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "character.hpp"
+#include "monster.hpp"
 
 class Player : public Character {
 	private:
@@ -13,6 +14,7 @@ class Player : public Character {
                 int maxMonsterCount;
                 bool isCasting;
                 std::vector<Spell> spellBook;   // List of spells to use
+                std::vector<Monster> summonedMon;
 	public:
         // Implement default and overloaded constructor
         Player();
@@ -34,8 +36,9 @@ class Player : public Character {
         int getInventorySize() const;   // Get the size of the current inventory
         int getSpellBookSize() const;   // Get the size of the current spell book
         void displayMana() const;       // Display mana
-        Weapon getWeapon(const int& index);       // Get a weapon
-        Spell getSpell(const int& index);         // Get a spell
+        Weapon getWeapon(const int index);       // Get a weapon
+        Spell getSpell(const int index);         // Get a spell
+        std::vector<Monster>& getSummonedMon();   // Get summoned monsters
 
         // Shop Functions
         int getCurrency();              // Return money
