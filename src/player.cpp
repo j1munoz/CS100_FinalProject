@@ -111,6 +111,10 @@ int Player::getSpellBookSize() const {
     return spellBook.size();
 }
 
+void Player::displayMana() const {
+    cout << mana << "/" << maxMana;
+}
+
 Weapon Player::getWeapon(const int& index) {
     return inventory[index];
 }
