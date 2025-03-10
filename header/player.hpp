@@ -21,6 +21,7 @@ class Player : public Character {
         void equipItem(int);            // Given an index, return Item in inventory
         void showInventory();           // Display items in inventory
         void addItem(Weapon);           // Add item to inventory
+        void removeItem(int);           // Removes item from inventory
         void sellItem(int);             // Sell item for price (pass index)
         void addSpell(Spell);           // Add spell to spellbook
         void showSpells();              // Display spells in spellbook
