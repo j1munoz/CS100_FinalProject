@@ -33,6 +33,7 @@ class Player : public Character {
         void setMaxMonCount(int);       // Set maximum monsters
         int getInventorySize() const;   // Get the size of the current inventory
         int getSpellBookSize() const;   // Get the size of the current spell book
+        void displayMana() const;       // Display mana
         Weapon getWeapon(const int& index);       // Get a weapon
         Spell getSpell(const int& index);         // Get a spell
 

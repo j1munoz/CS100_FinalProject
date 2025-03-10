@@ -57,8 +57,9 @@ void GameMaster::mainMenu() {
 }
 
 void GameMaster::battle() {
-    const int LENGTH = 36;
-    const int MANA_REGEN = 10;
+    const int HEALTH_BAR_LENGTH = 36;
+    const int MANA_BAR_LENGTH = 20;
+    const int MANA_REGEN = 5;
 
     SpellInfo *spellInfo = nullptr;
 
@@ -75,11 +76,16 @@ void GameMaster::battle() {
     do {
         cout << "Turn " << turnCount << endl << endl;
 
-        cout << "Your Health" << setw(LENGTH * 2) << right << enemy.getName() << endl;
-        cout << "======================================" << setw(LENGTH + 10) << right << "======================================\n";
-        cout << setw(LENGTH / 2) << right; player.displayHealth(); 
-        cout << setw(LENGTH + 7) << right; enemy.displayHealth();  
-        cout << "\n======================================" << setw(LENGTH + 10) << right << "======================================\n";
+        cout << "Your Mana" << endl;
+        cout << "====================" << endl;
+        cout << setw(MANA_BAR_LENGTH / 2) << right; player.displayMana();
+        cout << "\n====================" << endl;
+
+        cout << "Your Health" << setw(HEALTH_BAR_LENGTH * 2) << right << enemy.getName() << endl;
+        cout << "======================================" << setw(HEALTH_BAR_LENGTH + 10) << right << "======================================\n";
+        cout << setw(HEALTH_BAR_LENGTH / 2) << right; player.displayHealth(); 
+        cout << setw(HEALTH_BAR_LENGTH + 7) << right; enemy.displayHealth();  
+        cout << "\n======================================" << setw(HEALTH_BAR_LENGTH + 10) << right << "======================================\n";
 
         int userMenuChoice;
         displayChoiceMenu();
