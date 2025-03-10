@@ -18,7 +18,7 @@ Player::Player() {
     currentHealth = 50;
     mana = 100;
     defense = 10;
-    currentWeapon = Weapon("Stick", "Common", 10, 15, 0);
+    currentWeapon = Weapon("Flimsy Sword", "Common", 10, 15, 0);
 
     spellBook.push_back(Spell("Hocus Pocus", "Common", 20, 25, 2, 50));
 }
