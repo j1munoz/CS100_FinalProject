@@ -261,8 +261,7 @@ void GameMaster::shop() {
 
 void GameMaster::viewInventory() {
     int inventoryChoice;
-    Player player;
-    player = data.getPlayer();
+    Player &player = data.getPlayer();
 
     do {
         viewInventoryMenu();
@@ -292,7 +291,7 @@ void GameMaster::viewInventory() {
                             cin >> viewSpell;
                             fixBuffer();
 
-                            if(viewSpell >= 1 && viewSpell <= player.getInventorySize()) {
+                            if(viewSpell >= 1 && viewSpell <= player.getSpellBookSize()) {
                                 Spell_Viewer viewSpellStats;
                                 Spell showSpell = player.getSpell(viewSpell - 1);
 
@@ -301,7 +300,7 @@ void GameMaster::viewInventory() {
                                 outputError();
                             }
 
-                        } while(viewSpell < 1 || viewSpell > player.getInventorySize());
+                        } while(viewSpell < 1 || viewSpell > player.getSpellBookSize());
                     }
 
                 } else if(toupper(viewItemChoice) == 'W') {
