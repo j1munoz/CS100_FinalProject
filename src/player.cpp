@@ -7,10 +7,10 @@ using std::cout;
 using std::endl;
 
 Player::Player() {
-    currency = 0;
+    currency = 300;
     skillPoints = 0;
     monsterCount = 0;
-    maxMonsterCount = 0;
+    maxMonsterCount = 3;
     maxMana = 100;
     isCasting = false;
     name = "Villain";
@@ -20,7 +20,9 @@ Player::Player() {
     defense = 10;
     currentWeapon = Weapon("Flimsy Sword", "Common", 10, 15, 0);
 
-    spellBook.push_back(Spell("Hocus Pocus", "Common", 20, 25, 2, 50));
+    // Starting Spells
+    spellBook.push_back(Spell("Hocus Pocus", "Common", 40, 25, 2, 50));
+    spellBook.push_back(Spell("Summon Slime", "Monster", 0, 40, 0, 0));
 }
 
 void Player::equipItem(int index) {
@@ -115,10 +117,14 @@ void Player::displayMana() const {
     cout << mana << "/" << maxMana;
 }
 
-Weapon Player::getWeapon(const int& index) {
+Weapon Player::getWeapon(const int index) {
     return inventory[index];
 }
 
-Spell Player::getSpell(const int& index) {
+Spell Player::getSpell(const int index) {
     return spellBook[index];
+}
+
+std::vector<Monster>& Player::getSummonedMon() {
+    return this->summonedMon;
 }

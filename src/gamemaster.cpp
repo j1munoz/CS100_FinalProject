@@ -59,13 +59,13 @@ void GameMaster::mainMenu() {
 void GameMaster::battle() {
     const int HEALTH_BAR_LENGTH = 36;
     const int MANA_BAR_LENGTH = 20;
-    const int MANA_REGEN = 5;
+    const int MANA_REGEN = 10;
 
     SpellInfo *spellInfo = nullptr;
 
     // Temporary enemy place holder
     // Implement enemy generation here ------------------------------------------------------------------
-    Enemy enemy("Training Dummy", 50, 0, 5, Weapon("Stick Arm", "Common", 1, 11, 0), 75);
+    Enemy enemy("Training Dummy", 200, 0, 5, Weapon("Stick Arm", "Common", 1, 11, 0), 75);
 
     // We pass by reference so we can edit the actual values of Player
     Player &player = data.getPlayer();
@@ -87,6 +87,19 @@ void GameMaster::battle() {
         cout << setw(HEALTH_BAR_LENGTH + 7) << right; enemy.displayHealth();  
         cout << "\n======================================" << setw(HEALTH_BAR_LENGTH + 10) << right << "======================================\n";
 
+        for(int i = player.getSummonedMon().size() - 1; i >= 0; --i) {
+            if(player.getSummonedMon()[i].getLifetime() > player.getSummonedMon()[i].getMaxLifetime()) {
+                player.getSummonedMon().erase(player.getSummonedMon().begin() + i);
+                player.setMonCount(player.getSummonedMon().size());
+            } else {
+                cout << "\n" << player.getSummonedMon()[i].getName() << " Health (Lifetime: " 
+                << player.getSummonedMon()[i].getLifetime() << "/" << player.getSummonedMon()[i].getMaxLifetime() << ")" << endl;
+                cout << "======================================" << endl;
+                cout << setw(HEALTH_BAR_LENGTH / 2) << right; player.getSummonedMon()[i].displayHealth(); 
+                cout << "\n======================================" << endl;
+            }
+        }
+
         int userMenuChoice;
         displayChoiceMenu();
     
@@ -96,99 +109,117 @@ void GameMaster::battle() {
 
         bool playerTurnActive = true; // Whether player has gone or not
         
-        if(player.getCastingStatus()) {
-            if(spellInfo->timeElapsed == spellInfo->spell.getCastTime()) {
-                player.setCastingStatus(false);
-                
-                // Calculate damage done
-                float dmgValue = spellInfo->spell.getDmg() - enemy.getDefense();
-                float dmgDone = (dmgValue > 0) ? dmgValue : 0;
-
-                float healthValue = enemy.getHealth() - dmgDone;
-                float remainingHealth = (healthValue > 0) ? healthValue : 0;
-
-                enemy.setHealth(remainingHealth);
-
-                cout << endl;
-                cout << "You casted " << spellInfo->spell.getName() << " on " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
-            } else {
-                cout << "You are casting " << spellInfo->spell.getName() 
-                << " (" << spellInfo->timeElapsed << "/" << spellInfo->spell.getCastTime() << ")" << endl;
-
-                spellInfo->timeElapsed++;
-            }
-            playerTurnActive = false;
-        } else if(userMenuChoice == 1) {
+        if(userMenuChoice == 1) {
             // Attack here
-            do {
-                int userAttackChoice;
-                displayAttackMenu();
+            if(player.getCastingStatus()) {
+                if(spellInfo->timeElapsed == spellInfo->spell.getCastTime()) {
+                    player.setCastingStatus(false);
     
-                cout << "Select your attack: ";
-                cin >> userAttackChoice;
-                fixBuffer();
-    
-                if(userAttackChoice == 1) {
                     // Calculate damage done
-                    float dmgValue = player.useAttack() - enemy.getDefense();
+                    float dmgValue = spellInfo->spell.getDmg() - enemy.getDefense();
                     float dmgDone = (dmgValue > 0) ? dmgValue : 0;
-
+    
                     float healthValue = enemy.getHealth() - dmgDone;
                     float remainingHealth = (healthValue > 0) ? healthValue : 0;
-
+    
                     enemy.setHealth(remainingHealth);
-
-                    // Display damage done (critical hit or not)
+    
                     cout << endl;
-                    if(dmgValue + enemy.getDefense() == player.getCurrentWeapon().getDmg()*2) {
-                        cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << "* DMG! (Critical HIT)" << endl;
-                    } else {
-                        cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
-                    }
-
-                    playerTurnActive = false;
-                    break;
-                } else if(userAttackChoice == 2) {
-                    // Cast a Spell
-                    do {
-                        cout << "What Spell would you like to cast?" << endl;
-                        player.showSpells();
-                        
-                        int spellChoice;
-                        cout << "Select your choice: ";
-                        cin >> spellChoice;
-                        fixBuffer();
-
-                        // If valid choice
-                        if(spellChoice > 0 && spellChoice <= player.getSpellBookSize()) {
-                            // If the player has enough mana
-                            if(player.getMana() >= player.getSpell(spellChoice-1).getManaCost()) {
-                                int manaValue = player.getMana() - player.getSpell(spellChoice-1).getManaCost();
-                                int remainingMana = (manaValue > 0) ? manaValue : 0;
-
-                                player.setMana(remainingMana);
-                                player.setCastingStatus(true);
-                                playerTurnActive = false;
-
-                                delete spellInfo;
-                                spellInfo = new SpellInfo(1, player.getSpell(spellChoice - 1));
-                            } else {
-                                cout << "\nYou don't have enough mana to use this spell!" << endl;
-                            }
-                            break;
-                        } else {
-                            outputError();
-                        }
-                    } while(true);
-                    break;
-                } else if(userAttackChoice == 3) {
-                    // Go back to menu choices
-                    break;
+                    cout << "You casted " << spellInfo->spell.getName() << " on " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
                 } else {
-                    // Invalid input
-                    outputError();
+                    cout << "You are casting " << spellInfo->spell.getName() 
+                    << " (" << spellInfo->timeElapsed << "/" << spellInfo->spell.getCastTime() << ")" << endl;
                 }
-            } while(true);
+                playerTurnActive = false;
+            } else {
+                do {
+                    int userAttackChoice;
+                    displayAttackMenu();
+        
+                    cout << "Select your attack: ";
+                    cin >> userAttackChoice;
+                    fixBuffer();
+        
+                    if(userAttackChoice == 1) {
+                        // Calculate damage done
+                        float dmgValue = player.useAttack() - enemy.getDefense();
+                        float dmgDone = (dmgValue > 0) ? dmgValue : 0;
+    
+                        float healthValue = enemy.getHealth() - dmgDone;
+                        float remainingHealth = (healthValue > 0) ? healthValue : 0;
+    
+                        enemy.setHealth(remainingHealth);
+    
+                        // Display damage done (critical hit or not)
+                        cout << endl;
+                        if(dmgValue + enemy.getDefense() == player.getCurrentWeapon().getDmg()*2) {
+                            cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << "* DMG! (Critical HIT)" << endl;
+                        } else {
+                            cout << "You have attacked the " << enemy.getName() << " for " << dmgDone << " DMG!" << endl;
+                        }
+    
+                        playerTurnActive = false;
+                        break;
+                    } else if(userAttackChoice == 2) {
+                        // Cast a Spell
+                        do {
+                            cout << "What Spell would you like to cast?" << endl;
+                            player.showSpells();
+                            
+                            int spellChoice;
+                            cout << "Select your choice: ";
+                            cin >> spellChoice;
+                            fixBuffer();
+    
+                            // If valid choice
+                            if(spellChoice > 0 && spellChoice <= player.getSpellBookSize()) {
+                                // If the player has enough mana
+                                if(player.getMana() >= player.getSpell(spellChoice-1).getManaCost()) {
+                                    int manaValue = player.getMana() - player.getSpell(spellChoice-1).getManaCost();
+                                    int remainingMana = (manaValue > 0) ? manaValue : 0;
+    
+                                    player.setMana(remainingMana);
+    
+                                    // If a summoning spell, instantly summon (for next turn)
+                                    if(player.getSpell(spellChoice-1).getRarity() == "Monster") {
+                                        if(player.getMonCount() == player.getMaxMonCount()) {
+                                            player.setMana(player.getSpell(spellChoice-1).getManaCost());
+                                            cout << "You are at the limit for summoning monsters!!!" << endl;
+                                        } else {
+                                            // We are using the selling price as a index for now
+                                            Monster minion = data.getMonster(player.getSpell(spellChoice-1).getPrice());
+    
+                                            player.setMonCount(player.getMonCount() + 1);
+                                            player.getSummonedMon().push_back(minion);
+    
+                                            cout << "You have summoned a " << minion.getName() << " for " << minion.getMaxLifetime() << " turns!" << endl;
+                                            playerTurnActive = false;
+                                        }
+                                    } else {
+                                        player.setCastingStatus(true);
+                                        playerTurnActive = false;
+    
+                                        delete spellInfo;
+                                        spellInfo = new SpellInfo(0, player.getSpell(spellChoice - 1));
+                                    }
+                                } else {
+                                    cout << "\nYou don't have enough mana to use this spell!" << endl;
+                                }
+                                break;
+                            } else {
+                                outputError();
+                            }
+                        } while(true);
+                        break;
+                    } else if(userAttackChoice == 3) {
+                        // Go back to menu choices
+                        break;
+                    } else {
+                        // Invalid input
+                        outputError();
+                    }
+                } while(true);
+            }
         } else if(userMenuChoice == 2) {
             // View inventory here
             viewInventory();
@@ -201,23 +232,68 @@ void GameMaster::battle() {
             outputError();
         }
 
+        // Minions move
+        if(playerTurnActive == false && player.getMonCount() != 0) {
+            for(int i = 0; i < player.getMonCount(); ++i) {
+                player.getSummonedMon()[i].setLifetime(player.getSummonedMon()[i].getLifetime() + 1);
+
+                // Minion attack
+                float minionDmgValue = player.getSummonedMon()[i].useAttack() - enemy.getDefense();
+                float minionDmgDone = (minionDmgValue > 0) ? minionDmgValue : 0;
+
+                float healthValue = enemy.getHealth() - minionDmgDone;
+                float remainingHealth = (healthValue > 0) ? healthValue : 0;
+
+                enemy.setHealth(remainingHealth);
+
+                // Display damage done (critical hit or not)
+                if(minionDmgValue + enemy.getDefense() == player.getSummonedMon()[i].getCurrentWeapon().getDmg()*2) {
+                    cout << player.getSummonedMon()[i].getName() << " attacks " << enemy.getName() << " for " << minionDmgDone << "* DMG! (Critical HIT)" << endl;
+                } else {
+                    cout << player.getSummonedMon()[i].getName() << " attacks " << enemy.getName() << " for " << minionDmgDone << " DMG!" << endl;
+                }
+            }
+        }
+
         // Enemy attacks back
         if(enemy.isAlive() && playerTurnActive == false) {
-            float dmgValue = enemy.useAttack() - player.getDefense();
-            float dmgDone = (dmgValue > 0) ? dmgValue : 0;
+            int enemyTarget = player.getMonCount() != 0 ? (rand() % player.getMonCount()) + 1 : 1;
 
-            float healthValue = player.getHealth() - dmgDone;
-            float remainingHealth = (healthValue > 0) ? healthValue : 0;
+            // Enemy attacks player; else minion
+            if(enemyTarget == 1) {
+                float dmgValue = enemy.useAttack() - player.getDefense();
+                float dmgDone = (dmgValue > 0) ? dmgValue : 0;
 
-            player.setHealth(remainingHealth);
+                float healthValue = player.getHealth() - dmgDone;
+                float remainingHealth = (healthValue > 0) ? healthValue : 0;
 
-            // Display damage done (critical hit or not)
-            if(dmgValue + player.getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
-                cout << enemy.getName() << " attacks YOU for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
+                player.setHealth(remainingHealth);
+
+                // Display damage done (critical hit or not)
+                if(dmgValue + player.getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
+                    cout << enemy.getName() << " attacks YOU for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
+                } else {
+                    cout << enemy.getName() << " attacks YOU for " << dmgDone << " DMG!" << endl << endl;
+                }
             } else {
-                cout << enemy.getName() << " attacks YOU for " << dmgDone << " DMG!" << endl << endl;
+                float dmgValue = enemy.useAttack() - player.getSummonedMon()[enemyTarget-1].getDefense();
+                float dmgDone = (dmgValue > 0) ? dmgValue : 0;
+
+                float healthValue = player.getSummonedMon()[enemyTarget-1].getHealth() - dmgDone;
+                float remainingHealth = (healthValue > 0) ? healthValue : 0;
+
+                player.getSummonedMon()[enemyTarget-1].setHealth(remainingHealth);
+
+                // Display damage done (critical hit or not)
+                if(dmgValue + player.getSummonedMon()[enemyTarget-1].getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
+                    cout << enemy.getName() << " attacks " << player.getSummonedMon()[enemyTarget-1].getName() << " for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
+                } else {
+                    cout << enemy.getName() << " attacks " << player.getSummonedMon()[enemyTarget-1].getName() << " for " << dmgDone << " DMG!" << endl << endl;
+                }
             }
 
+            // Increment turn-based values (now that players turn is over)
+            if(player.getCastingStatus()) spellInfo->timeElapsed++;
             turnCount++;
 
             // Add mana per turn
@@ -257,6 +333,7 @@ void GameMaster::battle() {
     player.setMana(player.getMaxMana());
     player.setCastingStatus(false);
     player.setMonCount(0);
+    player.getSummonedMon().clear();
 
     delete spellInfo;
 }

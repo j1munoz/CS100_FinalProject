@@ -28,6 +28,8 @@ public:
         Shop& getShop();
         Player& getPlayer();
         void setPlayer(Player);
+
+        Monster getMonster(const int);
 };
 
 #endif /* GAMEDATA_HPP */
