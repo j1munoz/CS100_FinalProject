@@ -46,3 +46,7 @@ void Shop::fillShop(std::vector<Item> &listOfItems) {
         }
     }
 }
+
+std::vector<Item> Shop::getItemsForSale() const {
+    return itemsForSale;
+}
