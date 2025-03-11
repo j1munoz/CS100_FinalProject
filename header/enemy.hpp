@@ -10,17 +10,17 @@ class Enemy : public Character {
         float dropChance;
 
         // Private Helper Function
-        float rollDrop();
+        float rollDrop() const;
 	public:
         // Implement default and overloaded constructor
         Enemy();
-        Enemy(string name, float health, int mana, int defense, Weapon currentWeapon, float dropChance)
+        Enemy(const string& name, const float& health, const int& mana, const int& defense, const Weapon& currentWeapon, const float& dropChance)
         : Character(name, health, mana, defense, currentWeapon), dropChance(dropChance) {}
 
-        bool dropItem();    // Returns the dropped loot (if applicable)
+        bool dropItem() const;    // Returns the dropped loot (if applicable)
         
         // We must override these functions from Abstract class
-        float useAttack() override;  // If the entity can't perform this, return 0
+        float useAttack() const override;  // If the entity can't perform this, return 0
 };
 
 #endif /* ENEMY_HPP */

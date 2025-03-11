@@ -6,7 +6,7 @@
 
 class Shop_Viewer {
         public:
-        void displayItems(const std::vector<Item> &);  // Display items in the shop with prices
+        void displayItems(const std::vector<Item> &) const;  // Display items in the shop with prices
 };
 
 #endif /* SHOP_VIEWER_HPP */

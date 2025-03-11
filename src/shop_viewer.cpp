@@ -6,7 +6,7 @@
 using std::cout;
 using std::endl;
 
-void Shop_Viewer::displayItems(const std::vector<Item> &itemsForSale) {
+void Shop_Viewer::displayItems(const std::vector<Item> &itemsForSale) const {
     // This is the length of the bar; we will use this value to
     // format the prices to be right-justified
     const int FORMATTING_LENGTH = 34;

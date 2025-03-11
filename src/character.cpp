@@ -6,20 +6,19 @@ using std::endl;
 
 Character::Character() {}
 
-Character::Character(string name, float totalHealth, int mana, int defense, Weapon currentWeapon) 
+Character::Character(const string& name, const float& totalHealth, const int& mana, const int& defense, const Weapon& currentWeapon) 
     :name(name), totalHealth(totalHealth), currentHealth(totalHealth), 
     mana(mana), maxMana(mana), defense(defense), currentWeapon(currentWeapon) {}
 
-bool Character::isAlive() {
-    if(this->currentHealth <= 0) return false;
-    return true;
+bool Character::isAlive() const {
+    return this->currentHealth > 0;
 }
 
-string Character::getName() {
+string Character::getName() const {
     return name;
 }
 
-void Character::setMana(int amount) {
+void Character::setMana(const int& amount) {
     this->mana = amount;
 }
 
@@ -27,42 +26,42 @@ void Character::setMaxMana(const int& amount) {
     this->maxMana = amount;
 }
 
-int Character::getMana() {
+int Character::getMana() const {
     return this->mana;
 }
 
-int Character::getMaxMana() {
+int Character::getMaxMana() const {
     return this->maxMana;
 }
 
-void Character::setDefense(int amount) {
+void Character::setDefense(const int& amount) {
     this->defense = amount;
 }
 
-int Character::getDefense() {
+int Character::getDefense() const {
     return this->defense;
 }
 
-void Character::setHealth(float amount) {
+void Character::setHealth(const float& amount) {
     this->currentHealth = amount;
 }
 
-float Character::getHealth() {
+float Character::getHealth() const {
     return this->currentHealth;
 }
 
-void Character::setTotalHealth(float amount) {
+void Character::setTotalHealth(const float& amount) {
     this->totalHealth = amount;
 }
 
-float Character::getTotalHealth() {
+float Character::getTotalHealth() const {
     return this->totalHealth;
 }
 
-void Character::displayHealth() {
+void Character::displayHealth() const {
     cout << getHealth() << "/" << getTotalHealth();
 }
 
-Weapon Character::getCurrentWeapon() {
+Weapon Character::getCurrentWeapon() const {
     return currentWeapon;
 }

@@ -33,6 +33,6 @@ TEST(GameMasterTests, GameMasterBattleSpell) {
     float remainingHealth = (healthValue > 0) ? healthValue : 0;
 
     enemy.setHealth(remainingHealth);
-    //20
-    EXPECT_EQ(enemy.getHealth(), enemy.getTotalHealth() - 15);
+
+    EXPECT_EQ(enemy.getHealth(), enemy.getTotalHealth() - 35);
 }

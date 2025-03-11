@@ -14,13 +14,13 @@ private:
 public:
     // Implement default and overloaded constructor
     Item();
-    Item(string name, string rarity, float dmg, int price);
+    Item(const string& name, const string& rarity, const float& dmg, const int& price);
 
-    string getRarity();     // Returns rarity
-    string getName();       // Returns name
-    virtual float getDmg(); // Calculates damage
-    void setDmg(float);     // Sets damage
-    int getPrice();         // Returns price
+    string getRarity() const;       // Returns rarity
+    string getName() const;         // Returns name
+    virtual float getDmg() const;   // Calculates damage
+    void setDmg(const float&);      // Sets damage
+    int getPrice() const;           // Returns price
 };
 
 #endif /* ITEM_HPP */

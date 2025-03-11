@@ -11,10 +11,10 @@ private:
 public:
 	// Implement default and overloaded constructor
 	Spell();
-	Spell(string name, string rarity, float dmg, int manaCost, int castTime, int price);
+	Spell(const string& name, const string& rarity, const float& dmg, const int& manaCost, const int& castTime, const int& price);
 
-	int getManaCost(); // Returns mana cost
-	int getCastTime(); // Returns cast time
+	int getManaCost() const; // Returns mana cost
+	int getCastTime() const; // Returns cast time
 };
 
 #endif /* SPELL_HPP */

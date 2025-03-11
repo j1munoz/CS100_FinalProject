@@ -9,24 +9,24 @@ Shop::Shop() {
 }
 
 // Overloaded Constructor
-Shop::Shop(std::vector<Item> &everyItemInGame) {
+Shop::Shop(const std::vector<Item> &everyItemInGame) {
     fillShop(everyItemInGame);
 }
 
-void Shop::removeItem(int index) {
+void Shop::removeItem(const int& index) {
     itemsForSale.erase(itemsForSale.begin() + index - 1);
 }
 
 // Return bought item and call removeItem() function
 // Note: The player's money will be deducted in a different function
-Item Shop::purchaseItem(const int index) {
+Item Shop::purchaseItem(const int& index) {
     Item itemBought = itemsForSale[index-1];
     removeItem(index);
 
     return itemBought;
 }
 
-void Shop::fillShop(std::vector<Item> &listOfItems) {
+void Shop::fillShop(const std::vector<Item> &listOfItems) {
     const int SHOP_CAPACITY = 5;
 
     itemsForSale.clear();  // Make sure vector is clear of old items

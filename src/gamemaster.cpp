@@ -10,9 +10,9 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::setw;
-using std::left;
 using std::right;
 
+// Holds the information of the current spell in use
 struct SpellInfo {
     SpellInfo(int time, Spell spell) : timeElapsed(time), spell(spell) {}
 
@@ -20,6 +20,7 @@ struct SpellInfo {
     Spell spell;
 };
 
+// Holds the information of the current stat wishing to upgrade
 struct StatInfo {
     string statName;
     int statCost;
@@ -52,7 +53,7 @@ GameData& GameMaster::getData() {
     return data;
 }
 
-void GameMaster::mainMenu() {
+void GameMaster::mainMenu() const {
     cout << "\nPlease choose an option below:" << endl << endl;
     cout << "-------------------------------------" << endl;
     cout << "1. Battle" << endl;
@@ -97,15 +98,18 @@ void GameMaster::battle() {
         cout << setw(HEALTH_BAR_LENGTH + 7) << right; enemy.displayHealth();  
         cout << "\n======================================" << setw(HEALTH_BAR_LENGTH + 10) << right << "======================================\n";
 
+        // Display any summoned monsters on the field
         for(int i = player.getSummonedMon().size() - 1; i >= 0; --i) {
-            if(player.getSummonedMon()[i].getLifetime() > player.getSummonedMon()[i].getMaxLifetime()) {
+            Monster &minion = player.getSummonedMon()[i];
+
+            if(minion.getLifetime() > minion.getMaxLifetime()) {
                 player.getSummonedMon().erase(player.getSummonedMon().begin() + i);
                 player.setMonCount(player.getSummonedMon().size());
-            } else {
-                cout << "\n" << player.getSummonedMon()[i].getName() << " Health (Lifetime: " 
-                << player.getSummonedMon()[i].getLifetime() << "/" << player.getSummonedMon()[i].getMaxLifetime() << ")" << endl;
+            } else if(minion.isAlive()) {
+                cout << "\n" << minion.getName() << " Health (Lifetime: " 
+                << minion.getLifetime() << "/" << minion.getMaxLifetime() << ")" << endl;
                 cout << "======================================" << endl;
-                cout << setw(HEALTH_BAR_LENGTH / 2) << right; player.getSummonedMon()[i].displayHealth(); 
+                cout << setw(HEALTH_BAR_LENGTH / 2) << right; minion.displayHealth(); 
                 cout << "\n======================================" << endl;
             }
         }
@@ -121,7 +125,7 @@ void GameMaster::battle() {
         
         if(userMenuChoice == 1) {
             // Attack here
-            if(player.getCastingStatus()) {
+            if(player.getCastingStatus()) {     // Determine if the user is currently casting a spell
                 if(spellInfo->timeElapsed == spellInfo->spell.getCastTime()) {
                     player.setCastingStatus(false);
     
@@ -245,22 +249,25 @@ void GameMaster::battle() {
         // Minions move
         if(playerTurnActive == false && player.getMonCount() != 0) {
             for(int i = 0; i < player.getMonCount(); ++i) {
-                player.getSummonedMon()[i].setLifetime(player.getSummonedMon()[i].getLifetime() + 1);
+                Monster &currentMinion = player.getSummonedMon()[i];   // Current monster
+                currentMinion.setLifetime(currentMinion.getLifetime() + 1);
 
-                // Minion attack
-                float minionDmgValue = player.getSummonedMon()[i].useAttack() - enemy.getDefense();
-                float minionDmgDone = (minionDmgValue > 0) ? minionDmgValue : 0;
-
-                float healthValue = enemy.getHealth() - minionDmgDone;
-                float remainingHealth = (healthValue > 0) ? healthValue : 0;
-
-                enemy.setHealth(remainingHealth);
-
-                // Display damage done (critical hit or not)
-                if(minionDmgValue + enemy.getDefense() == player.getSummonedMon()[i].getCurrentWeapon().getDmg()*2) {
-                    cout << player.getSummonedMon()[i].getName() << " attacks " << enemy.getName() << " for " << minionDmgDone << "* DMG! (Critical HIT)" << endl;
-                } else {
-                    cout << player.getSummonedMon()[i].getName() << " attacks " << enemy.getName() << " for " << minionDmgDone << " DMG!" << endl;
+                if(currentMinion.isAlive()) {
+                    // Minion attack
+                    float minionDmgValue = currentMinion.useAttack() - enemy.getDefense();
+                    float minionDmgDone = (minionDmgValue > 0) ? minionDmgValue : 0;
+    
+                    float healthValue = enemy.getHealth() - minionDmgDone;
+                    float remainingHealth = (healthValue > 0) ? healthValue : 0;
+    
+                    enemy.setHealth(remainingHealth);
+    
+                    // Display damage done (critical hit or not)
+                    if(minionDmgValue + enemy.getDefense() == currentMinion.getCurrentWeapon().getDmg()*2) {
+                        cout << currentMinion.getName() << " attacks " << enemy.getName() << " for " << minionDmgDone << "* DMG! (Critical HIT)" << endl;
+                    } else {
+                        cout << currentMinion.getName() << " attacks " << enemy.getName() << " for " << minionDmgDone << " DMG!" << endl;
+                    }
                 }
             }
         }
@@ -286,19 +293,20 @@ void GameMaster::battle() {
                     cout << enemy.getName() << " attacks YOU for " << dmgDone << " DMG!" << endl << endl;
                 }
             } else {
-                float dmgValue = enemy.useAttack() - player.getSummonedMon()[enemyTarget-1].getDefense();
+                Monster &attackedMinion = player.getSummonedMon()[enemyTarget - 1];
+                float dmgValue = enemy.useAttack() - attackedMinion.getDefense();
                 float dmgDone = (dmgValue > 0) ? dmgValue : 0;
 
-                float healthValue = player.getSummonedMon()[enemyTarget-1].getHealth() - dmgDone;
+                float healthValue = attackedMinion.getHealth() - dmgDone;
                 float remainingHealth = (healthValue > 0) ? healthValue : 0;
 
-                player.getSummonedMon()[enemyTarget-1].setHealth(remainingHealth);
+                attackedMinion.setHealth(remainingHealth);
 
                 // Display damage done (critical hit or not)
-                if(dmgValue + player.getSummonedMon()[enemyTarget-1].getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
-                    cout << enemy.getName() << " attacks " << player.getSummonedMon()[enemyTarget-1].getName() << " for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
+                if(dmgValue + attackedMinion.getDefense() == enemy.getCurrentWeapon().getDmg()*2) {
+                    cout << enemy.getName() << " attacks " << attackedMinion.getName() << " for " << dmgDone << "* DMG! (Critical HIT)" << endl << endl;
                 } else {
-                    cout << enemy.getName() << " attacks " << player.getSummonedMon()[enemyTarget-1].getName() << " for " << dmgDone << " DMG!" << endl << endl;
+                    cout << enemy.getName() << " attacks " << attackedMinion.getName() << " for " << dmgDone << " DMG!" << endl << endl;
                 }
             }
 
@@ -331,8 +339,10 @@ void GameMaster::battle() {
         cout << "You have recieved $" << cashPrize << " for your efforts!" << endl;
 
         // Get experience points
-        int experience = rand() % 30 + 10;
+        int experience = rand() % 31 + 40;
         cout << "You have recieved " << experience << "xp points for your efforts!" << endl;
+
+        // If the player reached 100 or more experience, give them a skill point
         if(experience + player.getExperience() >= 100) {
             player.setExperience((experience + player.getExperience()) % 100);     // Reset experience, but keep leftover
 
@@ -385,7 +395,7 @@ void GameMaster::viewInventory() {
                 cin >> viewItemChoice;
                 fixBuffer();
 
-                if(toupper(viewItemChoice) == 'S') {
+                if(toupper(viewItemChoice) == 'S') {    // View spell
                     if(player.getSpellBookSize() == 0) {
                         cout << "\nYour spell book is currently empty.\n" << endl;
                     } else {
@@ -393,10 +403,11 @@ void GameMaster::viewInventory() {
                             
                         int viewSpell;
                         do {
-                            cout << "Select the item you would like to inspect: ";
+                            cout << "Select the spell you would like to inspect: ";
                             cin >> viewSpell;
                             fixBuffer();
 
+                            // Display the valid spell
                             if(viewSpell >= 1 && viewSpell <= player.getSpellBookSize()) {
                                 Spell_Viewer viewSpellStats;
                                 Spell showSpell = player.getSpell(viewSpell - 1);
@@ -409,7 +420,7 @@ void GameMaster::viewInventory() {
                         } while(viewSpell < 1 || viewSpell > player.getSpellBookSize());
                     }
 
-                } else if(toupper(viewItemChoice) == 'W') {
+                } else if(toupper(viewItemChoice) == 'W') { // Show weapons
                     if(player.getInventorySize() == 0) {
                         cout << "\nYour inventory is currently empty.\n" << endl;
                     } else {
@@ -417,10 +428,11 @@ void GameMaster::viewInventory() {
 
                         int viewWeapon;
                         do {
-                            cout << "Select the item you would like to inspect: ";
+                            cout << "Select the weapon you would like to inspect: ";
                             cin >> viewWeapon;
                             fixBuffer();
 
+                            // Display a valid weapon
                             if(viewWeapon >= 1 && viewWeapon <= player.getInventorySize()) {
                                 Weapon_Viewer viewWeaponStats;
                                 Weapon showWeapon = player.getWeapon(viewWeapon - 1);
@@ -443,7 +455,7 @@ void GameMaster::viewInventory() {
                 cout << "\nYou currently do not have any skill points to use. Returning...\n" << endl;
             } else {
                 int skillPointMenu;
-                vector<StatInfo> statInfo = {
+                vector<StatInfo> statInfo = {   // Holds the information of all stats
                     {"Health", 1, 5},
                     {"Mana", 1, 5},
                     {"Defense", 1, 1},
@@ -464,6 +476,7 @@ void GameMaster::viewInventory() {
                     cin >> skillPointMenu;
                     fixBuffer();
                     
+                    // Execute if the user entered a valid choice
                     if(skillPointMenu >= 1 && skillPointMenu <= 4) {
                         StatInfo currentStat = statInfo[skillPointMenu - 1];
                         int decideUpgrade;
@@ -476,6 +489,7 @@ void GameMaster::viewInventory() {
                                 cin >> decideUpgrade;
                                 fixBuffer();
     
+                                // Upgrade the stat
                                 if(decideUpgrade == 1) {
                                     UpgradeSystem upgradeStat;
     
@@ -491,9 +505,11 @@ void GameMaster::viewInventory() {
                                         upgradeStat.increaseMonsterCount(player, player.getMaxMonCount() + currentStat.statUpgradeAmount);
                                     }
 
+                                    // Subtract the user's skill points by the cost of the upgrade
                                     cout << "\nSuccessfully upgraded " << currentStat.statName << " by +" << currentStat.statUpgradeAmount << "!" << endl << endl;
                                     player.setSkillPoints(player.getSkillPoints() - currentStat.statCost);
                                     if(player.getSkillPoints() == 0) {
+                                        // Exit the menu since the user has no skill points available to spend
                                         skillPointMenu = 5;
                                     }
                                 } else if(decideUpgrade != 2) {
@@ -512,7 +528,7 @@ void GameMaster::viewInventory() {
     } while(inventoryChoice != 4);
 }
 
-void GameMaster::viewInventoryMenu() {
+void GameMaster::viewInventoryMenu() const {
     cout << "You are now in your inventory." << endl << endl;
     cout << "--------------------------" << endl;
     cout << "1. Equip Item" << endl;
@@ -568,11 +584,11 @@ void GameMaster::equipItem() {
 }
 
 // Error check the user input
-void GameMaster::fixBuffer() {
+void GameMaster::fixBuffer() const {
     cin.clear();
     cin.ignore(256, '\n');
 }
 
-void GameMaster::outputError() {
+void GameMaster::outputError() const {
     cout << "\nThat is not a valid command! Try again." << endl << endl;
 }

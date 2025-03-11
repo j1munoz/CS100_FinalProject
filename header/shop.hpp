@@ -9,14 +9,14 @@ class Shop {
                 std::vector<Item> itemsForSale;
 
                 // Private Helper Function
-                void removeItem(int);
+                void removeItem(const int&);
         public:
                 Shop();
-                Shop(std::vector<Item> &);
+                Shop(const std::vector<Item> &);
 
-                Item purchaseItem(const int);               // Pass index of item to purchase
-                void fillShop(std::vector<Item> &);         // Pass array of items, choose random items to sell
-                std::vector<Item> getItemsForSale() const;  // Return the items for sale
+                Item purchaseItem(const int&);               // Pass index of item to purchase
+                void fillShop(const std::vector<Item> &);    // Pass array of items, choose random items to sell
+                std::vector<Item> getItemsForSale() const;   // Return the items for sale
 };
 
 #endif /* SHOP_HPP */

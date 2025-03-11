@@ -21,27 +21,27 @@ class Character {
 	public:
         // Implement default and overloaded constructor
         Character();
-        Character(string name, float totalHealth, int mana, int defense, Weapon currentWeapon);
+        Character(const string& name, const float& totalHealth, const int& mana, const int& defense, const Weapon& currentWeapon);
         
-		bool isAlive();     // Tests if entity is alive
+		bool isAlive() const;     // Tests if entity is alive
 
         // NOTE: These functions are vitual because each attack
         // will be implemented slighty differently among entities
-        virtual float useAttack() = 0;  // Attack function
+        virtual float useAttack() const = 0;  // Attack function
 
-        string getName();
-        void setMana(int);              // Set mana cost
-        void setMaxMana(const int&);    // Set max mana
-        int getMana();                  // Return mana
-        int getMaxMana();               // Return max mana
-        void setHealth(float);          // Set health
-        float getHealth();              // Return health
-        void setDefense(int);           // Set defense
-        int getDefense();               // Return defense
-        void setTotalHealth(float);     // Set max health
-        float getTotalHealth();         // Get max heatlh
-        void displayHealth();           // Display health bar + mana
-        Weapon getCurrentWeapon();      // Return currently held weapon
+        string getName() const;
+        void setMana(const int&);              // Set mana cost
+        void setMaxMana(const int&);           // Set max mana
+        int getMana() const;                   // Return mana
+        int getMaxMana() const;                // Return max mana
+        void setHealth(const float&);          // Set health
+        float getHealth() const;               // Return health
+        void setDefense(const int&);           // Set defense
+        int getDefense() const;                // Return defense
+        void setTotalHealth(const float&);     // Set max health
+        float getTotalHealth() const;          // Get max heatlh
+        void displayHealth() const;            // Display health bar + mana
+        Weapon getCurrentWeapon() const;       // Return currently held weapon
 };
 
 #endif /* CHARACTER_HPP */

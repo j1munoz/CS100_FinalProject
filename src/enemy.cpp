@@ -2,24 +2,14 @@
 
 Enemy::Enemy() : Character("Enigma", 999, 999, 999, Weapon("Nothing", "N/A", 999, 999, 999)), dropChance(999) {}
 
-float Enemy::rollDrop() {
+float Enemy::rollDrop() const {
     return rand() % 100;
 }
 
-bool Enemy::dropItem() {
-    if (rollDrop() <= dropChance) {
-        return true;  // Get enemy's weapon
-    } else {
-        return false; // Get nothing
-    }
+bool Enemy::dropItem() const {
+    return rollDrop() <= dropChance;
 }
 
-float Enemy::useAttack() {
-    if(currentWeapon.rollCritChance()) {
-        return currentWeapon.getDmg() * 2; //Currently crits do 2x of weapons base damage
-    } else {
-        return currentWeapon.getDmg();
-    }
-
-    return 0;
+float Enemy::useAttack() const {
+    return (currentWeapon.rollCritChance()) ? currentWeapon.getDmg() * 2 : currentWeapon.getDmg();
 }

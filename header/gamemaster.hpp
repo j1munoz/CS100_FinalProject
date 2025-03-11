@@ -9,15 +9,15 @@ class GameMaster {
         GameData data;
     public:
         GameData& getData();
-        void mainMenu();
+        void mainMenu() const;
         void battle();
         void shop();
         void viewInventory();
-        void viewInventoryMenu();
+        void viewInventoryMenu() const;
         void equipItem();
         // Error check the user input
-        void fixBuffer();
-        void outputError();
+        void fixBuffer() const;
+        void outputError() const;
 };
 
 #endif /* GAMEMASTER.HPP */

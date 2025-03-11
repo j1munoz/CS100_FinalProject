@@ -2,24 +2,24 @@
 
 Item::Item() : name(""), rarity("Common"), dmg(0), price(0) {}
 
-Item::Item(string name, string rarity, float dmg, int price) : name(name), rarity(rarity), dmg(dmg), price(price) {}
+Item::Item(const string& name, const string& rarity, const float& dmg, const int& price) : name(name), rarity(rarity), dmg(dmg), price(price) {}
 
-string Item::getRarity() {
+string Item::getRarity() const {
     return this->rarity;
 }
 
-string Item::getName() {
+string Item::getName() const {
     return this->name;
 }
 
-float Item::getDmg() {
+float Item::getDmg() const {
     return this->dmg;
 }
 
-void Item::setDmg(float amount) {
+void Item::setDmg(const float& amount) {
     this->dmg = amount;
 }
 
-int Item::getPrice() {
+int Item::getPrice() const {
     return this->price;
 }
