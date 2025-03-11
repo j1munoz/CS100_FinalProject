@@ -42,7 +42,7 @@ GameData::GameData(): levelCount(1) {
         Monster("Golem", 80, 25, 30, 0, 5, Weapon("Sandstone Gauntlets", "Rare", 15, 40, 200))
     };
 
-    // theShop.fillShop(weaponList);
+    theShop.initializeShop(*this);
 }
 
 int GameData::getLvlCount() {
