@@ -14,13 +14,13 @@ Shop::Shop(std::vector<Item*> &everyItemInGame) {
     fillShop(everyItemInGame);
 }
 
-Shop::~Shop() {
-    for (int i = 0; i < itemsForSale.size(); i++) {
-        delete itemsForSale[i];
-    }
+// Shop::~Shop() {
+//     for (int i = 0; i < itemsForSale.size(); i++) {
+//         delete itemsForSale[i];
+//     }
 
-    itemsForSale.clear();
-}
+//     itemsForSale.clear();
+// }
 
 void Shop::removeItem(int index) {
     itemsForSale.erase(itemsForSale.begin() + index - 1);
