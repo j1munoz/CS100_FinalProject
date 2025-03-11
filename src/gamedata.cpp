@@ -45,6 +45,10 @@ GameData::GameData(): levelCount(1) {
     theShop.initializeShop(*this);
 }
 
+GameData::~GameData() {
+    clearBothLists();
+}
+
 int GameData::getLvlCount() {
     return this->levelCount;
 }

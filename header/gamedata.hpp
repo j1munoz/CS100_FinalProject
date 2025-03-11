@@ -23,6 +23,7 @@ private:
 public:
         // Implement default and overloaded constructor
         GameData();
+        ~GameData();
 
         int getLvlCount();
         void setLvlCount(int);

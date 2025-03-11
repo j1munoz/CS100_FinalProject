@@ -58,7 +58,6 @@ void Shop::fillShop(const std::vector<Item*> &listOfItems) {
 
 void Shop::initializeShop(GameData& gameData) {
     fillShop(gameData.getBothLists());  // Needed for getBothLists()
-    gameData.clearBothLists();
 }
 
 std::vector<Item*> Shop::getItemsForSale() const {
