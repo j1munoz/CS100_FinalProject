@@ -55,7 +55,13 @@ set(SOURCE_FILES
 add_executable(villain_revenge src/main.cpp ${SOURCE_FILES})
 
 set(TEST_FILES 
-    test/test.cpp
+    test/playerTests.cpp
+    test/enemyTests.cpp
+    test/shopTests.cpp
+    test/weaponTests.cpp
+    test/spellTests.cpp
+    test/gameDataTests.cpp
+    test/gameMasterTests.cpp
 )
 add_executable(runAllTests ${TEST_FILES} ${SOURCE_FILES})
 target_link_libraries(runAllTests gtest gtest_main)

@@ -14,8 +14,9 @@ class Shop {
                 Shop();
                 Shop(std::vector<Item> &);
 
-                Item purchaseItem(const int);        // Pass index of item to purchase
-                void fillShop(std::vector<Item> &);  // Pass array of items, choose random items to sell
+                Item purchaseItem(const int);               // Pass index of item to purchase
+                void fillShop(std::vector<Item> &);         // Pass array of items, choose random items to sell
+                std::vector<Item> getItemsForSale() const;  // Return the items for sale
 };
 
 #endif /* SHOP_HPP */
