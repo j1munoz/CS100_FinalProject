@@ -2,15 +2,20 @@
 #include <set>      // For keeping track of duplicates
 
 #include "../header/shop.hpp"
+#include "../header/gamedata.hpp"
 
 // Default Constructor
 Shop::Shop() {
-    // Nothing to implement
+    // Nothing to add
 }
 
 // Overloaded Constructor
-Shop::Shop(std::vector<Item> &everyItemInGame) {
+Shop::Shop(std::vector<Item*> &everyItemInGame) {
     fillShop(everyItemInGame);
+}
+
+Shop::~Shop() {
+    itemsForSale.clear();
 }
 
 void Shop::removeItem(int index) {
@@ -20,13 +25,13 @@ void Shop::removeItem(int index) {
 // Return bought item and call removeItem() function
 // Note: The player's money will be deducted in a different function
 Item Shop::purchaseItem(const int index) {
-    Item itemBought = itemsForSale[index-1];
+    Item itemBought = *itemsForSale[index-1];
     removeItem(index);
 
     return itemBought;
 }
 
-void Shop::fillShop(std::vector<Item> &listOfItems) {
+void Shop::fillShop(const std::vector<Item*> &listOfItems) {
     const int SHOP_CAPACITY = 5;
 
     itemsForSale.clear();  // Make sure vector is clear of old items
@@ -47,6 +52,6 @@ void Shop::fillShop(std::vector<Item> &listOfItems) {
     }
 }
 
-std::vector<Item> Shop::getItemsForSale() const {
+std::vector<Item*> Shop::getItemsForSale() const {
     return itemsForSale;
 }
