@@ -31,6 +31,7 @@ class Character {
 
         string getName();
         void setMana(int);              // Set mana cost
+        void setMaxMana(const int&);    // Set max mana
         int getMana();                  // Return mana
         int getMaxMana();               // Return max mana
         void setHealth(float);          // Set health

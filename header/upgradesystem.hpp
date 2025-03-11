@@ -1,16 +1,15 @@
 #ifndef UPGRADE_SYSTEM_HPP
 #define UPGRADE_SYSTEM_HPP
 
-#include "character.hpp"
+#include "player.hpp"
 
 class UpgradeSystem {
     public:
     // Skill Point Upgrades
-    void increaseHealth(Character& user, int amount);     // Increase maximum health
-    void increasePhysAtk(Character& user, int amount);
-    void inncreaseMgAtk(Character& user, int amount);
-    void increaseDef(Character& user, int amount);          // Increase defense
-    void increaseMana(Character& user, int amount);
+    void increaseHealth(Player& user, const int& amount);       // Increase maximum health
+    void increaseDef(Player& user, const int& amount);          // Increase defense
+    void increaseMana(Player& user, const int& amount);         // Increase mana
+    void increaseMonsterCount(Player& user, const int& amount); // Increase monster count
 };
 
 #endif /* UPGRADE_SYSTEM_HPP */

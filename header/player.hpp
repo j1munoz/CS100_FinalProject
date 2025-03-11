@@ -9,6 +9,7 @@ class Player : public Character {
 	private:
 		int currency;
                 int skillPoints;
+                int experience;
                 std::vector<Weapon> inventory;
                 int monsterCount;
                 int maxMonsterCount;
@@ -39,6 +40,10 @@ class Player : public Character {
         Weapon getWeapon(const int index);       // Get a weapon
         Spell getSpell(const int index);         // Get a spell
         std::vector<Monster>& getSummonedMon();   // Get summoned monsters
+        void setExperience(const int& exp);      // Set experience points
+        int getExperience() const;               // Get experience points
+        void setSkillPoints(const int& points);
+        int getSkillPoints() const;
 
         // Shop Functions
         int getCurrency();              // Return money

@@ -1,20 +1,17 @@
 #include "../header/upgradesystem.hpp"
 
-void UpgradeSystem::increaseHealth(Character& user, int amount) {
+void UpgradeSystem::increaseHealth(Player& user, const int& amount) {
     user.setTotalHealth(amount);
 }
-void UpgradeSystem::increasePhysAtk(Character& user, int amount) {
 
-}
-
-void UpgradeSystem::inncreaseMgAtk(Character& user, int amount) {
-
-}
-
-void UpgradeSystem::increaseDef(Character& user, int amount) {
+void UpgradeSystem::increaseDef(Player& user, const int& amount) {
     user.setDefense(amount);
 }
 
-void UpgradeSystem::increaseMana(Character& user, int amount) {
-    user.setMana(amount);
-} 
+void UpgradeSystem::increaseMana(Player& user, const int& amount) {
+    user.setMaxMana(amount);
+}
+
+void UpgradeSystem::increaseMonsterCount(Player& user, const int& amount) {
+    user.setMaxMonCount(amount);
+}
