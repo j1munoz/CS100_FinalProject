@@ -9,6 +9,7 @@ using std::endl;
 Player::Player() {
     currency = 300;
     skillPoints = 0;
+    experience = 0;
     monsterCount = 0;
     maxMonsterCount = 3;
     maxMana = 100;
@@ -127,4 +128,20 @@ Spell Player::getSpell(const int index) {
 
 std::vector<Monster>& Player::getSummonedMon() {
     return this->summonedMon;
+}
+
+void Player::setExperience(const int& exp) {
+    experience = exp;
+}
+
+int Player::getExperience() const {
+    return experience;
+}
+
+void Player::setSkillPoints(const int& points) {
+    skillPoints = points;
+}
+
+int Player::getSkillPoints() const {
+    return skillPoints;
 }

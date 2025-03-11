@@ -2,6 +2,7 @@
 #include "../header/spell_viewer.hpp"
 #include "../header/weapon_viewer.hpp"
 #include "../header/player.hpp"
+#include "../header/upgradesystem.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -17,6 +18,15 @@ struct SpellInfo {
 
     int timeElapsed;
     Spell spell;
+};
+
+struct StatInfo {
+    string statName;
+    int statCost;
+    int statUpgradeAmount;
+
+    StatInfo(const string& name, const int& cost, const int& upgrade) : 
+        statName(name), statCost(cost), statUpgradeAmount(upgrade) {}
 };
 
 // Generic helper function to display player choices
@@ -320,6 +330,19 @@ void GameMaster::battle() {
         player.setCurrency(cashPrize + player.getCurrency());
         cout << "You have recieved $" << cashPrize << " for your efforts!" << endl;
 
+        // Get experience points
+        int experience = rand() % 30 + 10;
+        cout << "You have recieved " << experience << "xp points for your efforts!" << endl;
+        if(experience + player.getExperience() >= 100) {
+            player.setExperience((experience + player.getExperience()) % 100);     // Reset experience, but keep leftover
+
+            cout << "You have gained 1 skill point!" << endl;
+            player.setSkillPoints(player.getSkillPoints() + 1);
+            cout << "Current skill points: " << player.getSkillPoints() << " point(s)" << endl;
+        } else {
+            player.setExperience(experience + player.getExperience());
+        }
+
         cout << "\nReturning to Main Menu..." << endl;
 
     // If the player loses
@@ -409,16 +432,84 @@ void GameMaster::viewInventory() {
 
                         } while(viewWeapon < 1 || viewWeapon > player.getInventorySize());
                     }
-
+                    
                 } else if(toupper(viewItemChoice) != 'Q') {
                     outputError();
                 }
             } while(toupper(viewItemChoice) != 'Q');
 
-        } else if(inventoryChoice != 3) {
+        } else if(inventoryChoice == 3) {
+            if(player.getSkillPoints() == 0) {
+                cout << "\nYou currently do not have any skill points to use. Returning...\n" << endl;
+            } else {
+                int skillPointMenu;
+                vector<StatInfo> statInfo = {
+                    {"Health", 1, 5},
+                    {"Mana", 1, 5},
+                    {"Defense", 1, 1},
+                    {"Monster Count", 3, 1}
+                };
+
+                do {
+                    cout << "\nUpgrade Your Stats" << endl;
+                    cout << "--------------------------------------" << endl;
+                    cout << "1. Health        (+5): 1 Skill Point" << endl;
+                    cout << "2. Mana          (+5): 1 Skill Point" << endl;
+                    cout << "3. Defense       (+1): 1 Skill Point" << endl;
+                    cout << "4. Monster Count (+1): 3 Skill Points" << endl;
+                    cout << "5. Quit" << endl;
+                    cout << "--------------------------------------\n" << endl;
+                    cout << "You currently have " << player.getSkillPoints() << " skill point(s)" << endl;
+                    cout << "Select the stat you want to upgrade (or quit): ";
+                    cin >> skillPointMenu;
+                    fixBuffer();
+                    
+                    if(skillPointMenu >= 1 && skillPointMenu <= 4) {
+                        StatInfo currentStat = statInfo[skillPointMenu - 1];
+                        int decideUpgrade;
+
+                        if(player.getSkillPoints() < currentStat.statCost) {
+                            cout << "\nSorry, you do not have enough skill points to upgrade " << currentStat.statName << "." << endl;
+                        } else {
+                            do {
+                                cout << "\nWould you like to upgrade " << currentStat.statName << " for " << currentStat.statCost << " skill point (<1> Yes, <2> No): ";
+                                cin >> decideUpgrade;
+                                fixBuffer();
+    
+                                if(decideUpgrade == 1) {
+                                    UpgradeSystem upgradeStat;
+    
+                                    if(currentStat.statName == "Health") {
+                                        upgradeStat.increaseHealth(player, player.getTotalHealth() + currentStat.statUpgradeAmount);
+                                        player.setHealth(player.getTotalHealth());
+                                    } else if(currentStat.statName == "Mana") {
+                                        upgradeStat.increaseMana(player, player.getMaxMana() + currentStat.statUpgradeAmount);
+                                        player.setMana(player.getMaxMana());
+                                    } else if(currentStat.statName == "Defense") {
+                                        upgradeStat.increaseDef(player, player.getDefense() + currentStat.statUpgradeAmount);
+                                    } else if(currentStat.statName == "Monster Count") {
+                                        upgradeStat.increaseMonsterCount(player, player.getMaxMonCount() + currentStat.statUpgradeAmount);
+                                    }
+
+                                    cout << "\nSuccessfully upgraded " << currentStat.statName << " by +" << currentStat.statUpgradeAmount << "!" << endl << endl;
+                                    player.setSkillPoints(player.getSkillPoints() - currentStat.statCost);
+                                    if(player.getSkillPoints() == 0) {
+                                        skillPointMenu = 5;
+                                    }
+                                } else if(decideUpgrade != 2) {
+                                    outputError();
+                                }
+                            } while(decideUpgrade != 1 && decideUpgrade != 2);
+                        }
+                    } else if(skillPointMenu != 5) {
+                        outputError();
+                    }
+                } while(skillPointMenu != 5);
+            }
+        } else if(inventoryChoice != 4) {
             outputError();
         }
-    } while(inventoryChoice != 3);
+    } while(inventoryChoice != 4);
 }
 
 void GameMaster::viewInventoryMenu() {
@@ -426,7 +517,8 @@ void GameMaster::viewInventoryMenu() {
     cout << "--------------------------" << endl;
     cout << "1. Equip Item" << endl;
     cout << "2. View Weapons/Spells" << endl;
-    cout << "3. Quit" << endl;
+    cout << "3. Upgrade Skills" << endl;
+    cout << "4. Quit" << endl;
     cout << "--------------------------" << endl << endl;
     cout << "Select your choice: ";
 }

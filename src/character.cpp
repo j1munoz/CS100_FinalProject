@@ -23,6 +23,10 @@ void Character::setMana(int amount) {
     this->mana = amount;
 }
 
+void Character::setMaxMana(const int& amount) {
+    this->maxMana = amount;
+}
+
 int Character::getMana() {
     return this->mana;
 }
