@@ -14,6 +14,14 @@ Shop::Shop(std::vector<Item*> &everyItemInGame) {
     fillShop(everyItemInGame);
 }
 
+Shop::~Shop() {
+    for (int i = 0; i < itemsForSale.size(); i++) {
+        delete itemsForSale[i];
+    }
+
+    itemsForSale.clear();
+}
+
 void Shop::removeItem(int index) {
     itemsForSale.erase(itemsForSale.begin() + index - 1);
 }
@@ -50,6 +58,7 @@ void Shop::fillShop(const std::vector<Item*> &listOfItems) {
 
 void Shop::initializeShop(GameData& gameData) {
     fillShop(gameData.getBothLists());  // Needed for getBothLists()
+    gameData.clearBothLists();
 }
 
 std::vector<Item*> Shop::getItemsForSale() const {
