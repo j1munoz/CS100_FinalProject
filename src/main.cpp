@@ -1,18 +1,8 @@
 #include <iostream>
-#include "../header/gamedata.hpp"
+
 #include "../header/gamemaster.hpp"
-#include "../header/player.hpp"
-#include "../header/character.hpp"
-#include "../header/enemy.hpp"
-#include "../header/item.hpp"
-#include "../header/weapon_viewer.hpp"
-#include "../header/spell_viewer.hpp"
 
 using namespace std;
-
-void outputError() {
-    cout << "\nThat is not a valid command! Try again." << endl << endl;
-}
 
 int main() {
     int choice;     // Gets the user input
@@ -35,7 +25,7 @@ int main() {
             navigate.viewInventory();
         }
         else if(choice != 4) {
-            outputError();
+            navigate.outputError();
         }
 
     } while (choice != 4 && navigate.getData().getPlayer().isAlive());

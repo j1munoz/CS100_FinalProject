@@ -62,6 +62,8 @@ set(TEST_FILES
     test/spellTests.cpp
     test/gameDataTests.cpp
     test/gameMasterTests.cpp
+    test/upgradeSystemTests.cpp
+    test/monsterTests.cpp
 )
 add_executable(runAllTests ${TEST_FILES} ${SOURCE_FILES})
 target_link_libraries(runAllTests gtest gtest_main)

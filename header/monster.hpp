@@ -12,17 +12,17 @@ class Monster : public Character {
         public:
         // Implement default and overloaded constructor
         Monster();
-        Monster(string name, float health, int mana, int defense, int lifetime, int maxLifetime, Weapon currentWeapon)
+        Monster(const string& name, const float& health, const int& mana, const int& defense, const int& lifetime, const int& maxLifetime, const Weapon& currentWeapon)
         : Character(name, health, mana, defense, currentWeapon), lifetime(lifetime), maxLifetime(maxLifetime) {}
 
-        int getLifetime();        // Return lifetime
-        void setLifetime(int);    // Sets the lifetime
+        int getLifetime() const;                // Return lifetime
+        void setLifetime(const int&);           // Sets the lifetime
 
-        int getMaxLifetime();     // Return max lifetime
-        void setMaxLifetime(int); // Sets the max lifetime
+        int getMaxLifetime() const;             // Return max lifetime
+        void setMaxLifetime(const int&);        // Sets the max lifetime
         
         // We must override these functions from Abstract class
-        float useAttack() override;  // If the entity can't perform this, return 0
+        float useAttack() const override;       // If the entity can't perform this, return 0
 };
 
 #endif /* MONSTER_HPP */

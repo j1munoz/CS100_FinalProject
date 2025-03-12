@@ -6,8 +6,8 @@
 TEST(PlayerTests, playerDefaultConstructor) {
     Player player;
 
-    EXPECT_EQ(player.getCurrency(), 0);
-    EXPECT_EQ(player.getMaxMonCount(), 0);
+    EXPECT_EQ(player.getCurrency(), 300);
+    EXPECT_EQ(player.getMaxMonCount(), 3);
     EXPECT_EQ(player.getMonCount(), 0);
     EXPECT_EQ(player.getMana(), 100);
     EXPECT_EQ(player.getMaxMana(), 100);
@@ -17,7 +17,7 @@ TEST(PlayerTests, playerDefaultConstructor) {
     EXPECT_EQ(player.getTotalHealth(), 50);
     EXPECT_EQ(player.getDefense(), 10);
     EXPECT_EQ(player.getCurrentWeapon().getName(), "Flimsy Sword");
-    EXPECT_EQ(player.getSpellBookSize(), 1);
+    EXPECT_EQ(player.getSpellBookSize(), 2);
     EXPECT_TRUE(player.isAlive());
 }
 
@@ -53,7 +53,7 @@ TEST(PlayerTests, playerAddSpell) {
 
     player.addSpell(Spell("Fireball", "Common", 30, 10, 1, 50));
 
-    EXPECT_EQ(player.getSpell(1).getName(), "Fireball");
+    EXPECT_EQ(player.getSpell(2).getName(), "Fireball");
 }
 
 TEST(PlayerTests, playerCurrency) {

@@ -49,12 +49,12 @@ GameData::~GameData() {
     clearBothLists();
 }
 
-int GameData::getLvlCount() {
+int GameData::getLvlCount() const {
     return this->levelCount;
 }
 
-void GameData::setLvlCount(int amount) {
-    this->levelCount = amount;
+void GameData::setLvlCount(const int& level) {
+    this->levelCount = level;
 }
 
 std::vector<Item*> GameData::getBothLists() {
@@ -86,10 +86,10 @@ Player& GameData::getPlayer() {
     return this->user;
 }
 
-void GameData::setPlayer(Player user) {
+void GameData::setPlayer(const Player& user) {
     this->user = user;
 }
 
-Monster GameData::getMonster(const int index) {
+Monster GameData::getMonster(const int& index) const{
     return this->monsterList[index];
 }

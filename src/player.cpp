@@ -26,11 +26,11 @@ Player::Player() {
     spellBook.push_back(Spell("Summon Slime", "Monster", 0, 40, 0, 0));
 }
 
-void Player::equipItem(int index) {
+void Player::equipItem(const int& index) {
     currentWeapon = inventory[index];
 }
 
-void Player::showInventory() {
+void Player::showInventory() const {
     cout << "\n--------------------------" << endl;
     
     for(int i = 0; i < inventory.size(); i++) {
@@ -39,23 +39,23 @@ void Player::showInventory() {
     cout << "--------------------------" << endl << endl;
 }
 
-void Player::addItem(Weapon item) {
+void Player::addItem(const Weapon& item) {
     inventory.push_back(item);
 }
 
-void Player::removeItem(int index) {
+void Player::removeItem(const int& index) {
     inventory.erase(inventory.begin() + index);
 }
 
-void Player::sellItem(int index) {
+void Player::sellItem(const int& index) {
     // Implement code here
 }
 
-void Player::addSpell(Spell item) {
+void Player::addSpell(const Spell& item) {
     spellBook.push_back(item);
 }
 
-void Player::showSpells() {
+void Player::showSpells() const {
     cout << "\n--------------------------" << endl;
     for(int i = 0; i < spellBook.size(); i++) {
         cout << i + 1 << ". " << spellBook[i].getName() << endl;
@@ -63,47 +63,40 @@ void Player::showSpells() {
     cout << "--------------------------" << endl << endl;
 }
 
-bool Player::getCastingStatus() {
+bool Player::getCastingStatus() const {
     return this->isCasting;
 }
 
-void Player::setCastingStatus(bool status) {
+void Player::setCastingStatus(const bool& status) {
     this->isCasting = status;
 }
 
-int Player::getMonCount() {
+int Player::getMonCount() const {
     return this->monsterCount;
 }
 
-void Player::setMonCount(int amount) {
+void Player::setMonCount(const int& amount) {
     this->monsterCount = amount;
 }
 
-int Player::getMaxMonCount() {
+int Player::getMaxMonCount() const {
     return this->maxMonsterCount;
 }
 
-void Player::setMaxMonCount(int amount) {
+void Player::setMaxMonCount(const int& amount) {
     this->maxMonsterCount = amount;
 }
 
-int Player::getCurrency() {
+int Player::getCurrency() const {
     return this->currency;
 }
 
-void Player::setCurrency(int amount) {
+void Player::setCurrency(const int& amount) {
     this->currency = amount;
 }
 
-float Player::useAttack() {
-    if(currentWeapon.rollCritChance()) {
-        return currentWeapon.getDmg() * 2; //Currently crits do 2x of weapons base damage
-    }
-    else {
-        return currentWeapon.getDmg();
-    }
-
-    return 0;
+float Player::useAttack() const {
+    return (currentWeapon.rollCritChance()) ? currentWeapon.getDmg() * 2 : currentWeapon.getDmg();
 }
 
 int Player::getInventorySize() const {
@@ -118,11 +111,11 @@ void Player::displayMana() const {
     cout << mana << "/" << maxMana;
 }
 
-Weapon Player::getWeapon(const int index) {
+Weapon Player::getWeapon(const int& index) {
     return inventory[index];
 }
 
-Spell Player::getSpell(const int index) {
+Spell Player::getSpell(const int& index) {
     return spellBook[index];
 }
 

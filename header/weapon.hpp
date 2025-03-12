@@ -10,10 +10,10 @@ private:
 public:
         // Implement default and overloaded constructor
         Weapon();
-        Weapon(string name, string rarity, float critChance, float dmg, int price);
-        bool rollCritChance(); // Returns if crit chance was successful
+        Weapon(const string& name, const string& rarity, const float& critChance, const float& dmg, const int& price);
+        bool rollCritChance() const; // Returns if crit chance was successful
         float getCritChance() const;
-        float getDmg() override;
+        float getDmg() const override;
 };
 
 #endif /* WEAPON_HPP */
