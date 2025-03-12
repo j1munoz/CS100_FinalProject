@@ -32,6 +32,7 @@ public:
         void setPlayer(const Player&);                  // Set the player
         Monster getMonster(const int&) const;           // Get a monster
   
+        std::vector<Enemy>& getEnemyList();
         std::vector<Item*> getBothLists();
         void clearBothLists();
 };

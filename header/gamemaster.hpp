@@ -15,6 +15,8 @@ class GameMaster {
         void viewInventory();
         void viewInventoryMenu() const;
         void equipItem();
+        void generateLevel(vector<Enemy>&);
+
         // Error check the user input
         void fixBuffer() const;
         void outputError() const;

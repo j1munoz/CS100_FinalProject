@@ -15,10 +15,12 @@ Player::Player() {
     maxMana = 100;
     isCasting = false;
     name = "Villain";
-    totalHealth = 50;
-    currentHealth = 50;
+    totalHealth = 100;
+    currentHealth = 100;
     mana = 100;
     defense = 10;
+    
+    // Starting weapon
     currentWeapon = Weapon("Flimsy Sword", "Common", 10, 15, 0);
 
     // Starting Spells
