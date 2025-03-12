@@ -10,7 +10,7 @@ Shop::Shop() {
 }
 
 // Overloaded Constructor
-Shop::Shop(std::vector<Item*> &everyItemInGame) {
+Shop::Shop(const std::vector<Item*> &everyItemInGame) {
     fillShop(everyItemInGame);
 }
 
@@ -18,7 +18,7 @@ Shop::~Shop() {
     itemsForSale.clear();
 }
 
-void Shop::removeItem(int index) {
+void Shop::removeItem(const int index) {
     itemsForSale.erase(itemsForSale.begin() + index - 1);
 }
 
