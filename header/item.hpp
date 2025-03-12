@@ -15,6 +15,7 @@ public:
     // Implement default and overloaded constructor
     Item();
     Item(const string& name, const string& rarity, const float& dmg, const int& price);
+    virtual ~Item() {}
 
     string getRarity() const;       // Returns rarity
     string getName() const;         // Returns name
