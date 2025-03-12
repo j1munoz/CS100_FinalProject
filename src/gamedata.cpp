@@ -42,8 +42,6 @@ GameData::GameData(): levelCount(1) {
         Monster("Golem", 80, 25, 30, 0, 5, Weapon("Sandstone Gauntlets", "Rare", 15, 40, 200))
     };
 
-    levelCount = 1;
-
     theShop.fillShop(getBothLists());
 }
 
@@ -94,8 +92,4 @@ void GameData::setPlayer(const Player& user) {
 
 Monster GameData::getMonster(const int& index) const{
     return this->monsterList[index];
-}
-
-std::vector<Enemy>& GameData::getEnemyList() {
-    return this->enemyList;
 }
