@@ -3,6 +3,8 @@
 #include "../header/weapon_viewer.hpp"
 #include "../header/player.hpp"
 #include "../header/upgradesystem.hpp"
+#include "../header/shop.hpp"
+#include "../header/shop_viewer.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -398,7 +400,68 @@ void GameMaster::battle() {
 }
 
 void GameMaster::shop() {
-    cout << "View shop" << endl;
+    char userChoice;
+    Player &player = data.getPlayer();  // Get the player by reference to save changes
+    Shop &shop = data.getShop();        // Get the shop
+    shop.fillShop(data.getBothLists()); // Fill the shop with items
+    Shop_Viewer view;
+
+    cout << "\nYou are now in the Shop." << endl;
+
+    do {
+        cout << "Currency: " << player.getCurrency() << endl << endl;
+        // Display the items available in the shop
+        view.displayItems(shop.getItemsForSale());
+
+        // Prompt the user for their choice
+        cout << "Select your Choice: ";
+        cin >> userChoice;
+
+        // Check if the input is a digit
+        if (isdigit(userChoice)) {
+            int index = userChoice - '0'; // Convert char to int
+
+            // Validate the index
+            if (index >= 1 && index <= shop.getItemsForSale().size()) {
+                Item* selectedItem = shop.getItemsForSale()[index - 1];
+
+                // Check if the player has enough currency
+                if (player.getCurrency() >= selectedItem->getPrice()) {
+                    cout << "Would you like to buy " << selectedItem->getName() << " for $" << selectedItem->getPrice() << endl;
+                    cout << "Enter <Y> or <N>: ";
+                    cin >> userChoice;
+
+                    if (userChoice == 'Y' || userChoice == 'y') {
+                        // Deduct the price from the player's currency
+                        player.setCurrency(player.getCurrency() - selectedItem->getPrice());
+                        // Add the item to the player's inventory
+                        if (Weapon* weapon = dynamic_cast<Weapon*>(selectedItem)) {
+                            player.addItem(*weapon); // Add weapon to inventory
+                        } 
+                        else if (Spell* spell = dynamic_cast<Spell*>(selectedItem)) {
+                            player.addSpell(*spell); // Add spell to spellbook
+                        }
+                        // Purchase the item and remove it from the shop
+                        shop.purchaseItem(index);
+                        cout << "\nYou have successfuly bought " << selectedItem->getName() << " for $" << selectedItem->getPrice() << endl;
+                    }
+                    else if (userChoice == 'N' || userChoice == 'n') {
+                        cout << "Declined Purchase for " << selectedItem->getName() << endl;
+                    }
+                } 
+                else {
+                    cout << "Sorry, you have insufficient funds!" << endl;
+                }
+            } 
+            else {
+                cout << "\nInvalid Input! Try Again." << endl;
+            }
+        } 
+        else if (userChoice != 'Q' && userChoice != 'q') {
+            cout << "\nInvalid input! Try Again." << endl;
+        }
+    } while (userChoice != 'Q' && userChoice != 'q'); // Exit loop if user chooses to quit
+    cout << "You have left the Shop." << endl;
 }
 
 void GameMaster::viewInventory() {
