@@ -51,7 +51,7 @@ TEST(PlayerTests, playerRemoveItem) {
 TEST(PlayerTests, playerAddSpell) {
     Player player;
 
-    player.addSpell(Spell("Fireball", "Common", 30, 10, 1, 50));
+    player.addSpell(Spell("Fireball", "Common", 30, 10, 1, 50, -1));
 
     EXPECT_EQ(player.getSpell(2).getName(), "Fireball");
 }

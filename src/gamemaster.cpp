@@ -217,8 +217,7 @@ void GameMaster::battle() {
                                                 player.setMana(player.getSpell(spellChoice-1).getManaCost());
                                                 cout << "You are at the limit for summoning monsters!!!" << endl;
                                             } else {
-                                                // We are using the selling price as a index for now
-                                                Monster minion = data.getMonster(player.getSpell(spellChoice-1).getPrice());
+                                                Monster minion = data.getMonster(player.getSpell(spellChoice-1).getMonsterIndex());
         
                                                 player.setMonCount(player.getMonCount() + 1);
                                                 player.getSummonedMon().push_back(minion);
@@ -370,6 +369,9 @@ void GameMaster::battle() {
             } else {
                 player.setExperience(experience + player.getExperience());
             }
+
+            // Increment level if all enemies slain
+            if(currEnemy == enemies.size()-1) data.setLvlCount(data.getLvlCount() + 1);
     
         // If the player loses
         } else if(!player.isAlive()) {
@@ -392,9 +394,6 @@ void GameMaster::battle() {
     player.setCastingStatus(false);
     player.setMonCount(0);
     player.getSummonedMon().clear();
-
-    // Increment level
-    data.setLvlCount(data.getLvlCount() + 1);
 
     delete spellInfo;
 }

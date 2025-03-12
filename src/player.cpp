@@ -24,8 +24,8 @@ Player::Player() {
     currentWeapon = Weapon("Flimsy Sword", "Common", 10, 15, 0);
 
     // Starting Spells
-    spellBook.push_back(Spell("Hocus Pocus", "Common", 40, 25, 2, 50));
-    spellBook.push_back(Spell("Summon Slime", "Monster", 0, 40, 0, 0));
+    spellBook.push_back(Spell("Hocus Pocus", "Common", 40, 25, 2, 50, -1));
+    spellBook.push_back(Spell("Summon Slime", "Monster", 0, 40, 0, 50, 0));
 }
 
 void Player::equipItem(const int& index) {

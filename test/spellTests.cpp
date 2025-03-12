@@ -13,7 +13,7 @@ TEST(SpellTests, spellDefaultConstructor) {
 }
 
 TEST(SpellTests, spellOverloadConstructor) {
-    Spell spell("Lighting Wave", "Rare", 60, 20, 3, 150);
+    Spell spell("Lighting Wave", "Rare", 60, 20, 3, 150, -1);
 
     EXPECT_EQ(spell.getCastTime(), 3);
     EXPECT_EQ(spell.getDmg(), 60);
