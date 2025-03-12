@@ -13,6 +13,7 @@ void Shop_Viewer::displayItems(const std::vector<Item*> &itemsForSale) const {
 
     // Print shop items with name and price formatted
     cout << "-------------------------------------" << endl;
+    cout << "Items for Sale:" << endl;
     if(itemsForSale.size() > 0) {
         for(int i = 0; i < itemsForSale.size(); ++i) {
             Item* currentItem = itemsForSale[i];
