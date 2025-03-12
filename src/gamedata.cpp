@@ -12,7 +12,7 @@ GameData::GameData(): levelCount(1) {
         Weapon("Vanguard Claymore", "Rare", 30, 40, 150),
         Weapon("Crusader Hammer", "Rare", 30, 40, 200),
         Weapon("Sandstone Gauntlets", "Rare", 30, 40, 200),
-        Weapon("Hammer of Giants", "Legendary", 50, 75, 500)
+        Weapon("Hammer of Giants", "Legendary", 30, 65, 500)
         
     };
     spellList = {
@@ -23,9 +23,9 @@ GameData::GameData(): levelCount(1) {
         Spell("Summon Nymph", "Monster", 0, 45, 0, 400, 3),
         Spell("Summon Ifrit", "Monster", 0, 100, 0, 1000, 4),
         Spell("Fireball", "Common", 30, 10, 1, 50, -1),
-        Spell("Ice Trap", "Uncommon", 45, 15, 2, 100, -1),
-        Spell("Lighting Wave", "Rare", 60, 20, 3, 150, -1),
-        Spell("Meteor Shower", "Legendary", 100, 50, 5, 600, -1)
+        Spell("Ice Trap", "Uncommon", 45, 15, 1, 100, -1),
+        Spell("Lighting Wave", "Rare", 60, 20, 2, 150, -1),
+        Spell("Meteor Shower", "Legendary", 100, 50, 3, 600, -1)
     };
 
     enemyList = {
