@@ -42,7 +42,11 @@ GameData::GameData(): levelCount(1) {
         Monster("Golem", 80, 25, 30, 0, 5, Weapon("Sandstone Gauntlets", "Rare", 15, 40, 200))
     };
 
-    theShop.fillShop(weaponList);
+    theShop.fillShop(getBothLists());
+}
+
+GameData::~GameData() {
+    clearBothLists();
 }
 
 int GameData::getLvlCount() const {
@@ -51,6 +55,27 @@ int GameData::getLvlCount() const {
 
 void GameData::setLvlCount(const int& level) {
     this->levelCount = level;
+}
+
+std::vector<Item*> GameData::getBothLists() {
+    bothItemLists.clear();
+
+    for (int i = 0; i < weaponList.size(); i++) {
+        bothItemLists.push_back(new Weapon(weaponList[i]));
+    }
+    
+    for (int i = 0; i < spellList.size(); i++) {
+        bothItemLists.push_back(new Spell(spellList[i]));
+    }
+
+    return bothItemLists;
+}
+
+void GameData::clearBothLists() {
+    for (int i = 0; i < bothItemLists.size(); i++) {
+        delete bothItemLists[i];
+    }
+    bothItemLists.clear();
 }
 
 Shop& GameData::getShop() {
