@@ -3,6 +3,8 @@
 #include "../header/weapon_viewer.hpp"
 #include "../header/player.hpp"
 #include "../header/upgradesystem.hpp"
+#include "../header/shop.hpp"
+#include "../header/shop_viewer.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -398,7 +400,28 @@ void GameMaster::battle() {
 }
 
 void GameMaster::shop() {
-    cout << "View shop" << endl;
+    char userChoice;
+    Player &player = data.getPlayer();
+    Shop &shop = data.getShop();
+    shop.fillShop(data.getBothLists());;
+    Shop_Viewer view;
+
+    cout << "You are now in the Shop." << endl;
+    cout << "Currency: " << player.getCurrency() << endl;
+
+    do {
+        view.displayItems(shop.getItemsForSale());
+        cout << "Select your Choice: ";
+        cin >> userChoice;
+
+
+        if (isdigit(userChoice)) {
+            int index = userChoice - '0';
+            shop.purchaseItem(index);
+
+        }
+
+    } while(userChoice != 'Q' && userChoice != 'q');
 }
 
 void GameMaster::viewInventory() {
