@@ -51,7 +51,7 @@ Here is a UML Diagram of all the classes within our program. The blue boxes next
 ## Class Diagram with S.O.L.I.D. Principles
 Here is an updated UML Diagram of all the classes within our program using S.O.L.I.D principles. Classes in RED denote new classes made as a result to not violate any principles. Yellow Notes are new descriptions for the newly added classes.
 
-![CS-100 UML_SOLID drawio (1)](https://github.com/user-attachments/assets/85ae6907-db20-4f44-93f9-29dad6674f1a)
+![CS-100 UML_SOLID drawio](https://github.com/user-attachments/assets/db8a742d-7171-449e-91a7-0f14778195a1)
 *Note: To avoid cluttering, the notes with the class descriptions can be found [here](https://github.com/user-attachments/assets/18974f37-20e9-46ea-9916-b79e0f869419).*
 
 ## S.O.L.I.D. Explanations
