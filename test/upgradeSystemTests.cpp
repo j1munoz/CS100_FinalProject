@@ -8,7 +8,7 @@ TEST(UpgradeSystemTests, upgradeHealth) {
 
     upgrade.increaseHealth(player, player.getTotalHealth() + 5);
 
-    EXPECT_EQ(player.getTotalHealth(), 55);
+    EXPECT_EQ(player.getTotalHealth(), 105);
 }
 
 TEST(UpgradeSystemTests, upgradeDefense) {

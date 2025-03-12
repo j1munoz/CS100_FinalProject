@@ -13,8 +13,8 @@ TEST(PlayerTests, playerDefaultConstructor) {
     EXPECT_EQ(player.getMaxMana(), 100);
     EXPECT_FALSE(player.getCastingStatus());
     EXPECT_EQ(player.getName(), "Villain");
-    EXPECT_EQ(player.getHealth(), 50);
-    EXPECT_EQ(player.getTotalHealth(), 50);
+    EXPECT_EQ(player.getHealth(), 100);
+    EXPECT_EQ(player.getTotalHealth(), 100);
     EXPECT_EQ(player.getDefense(), 10);
     EXPECT_EQ(player.getCurrentWeapon().getName(), "Flimsy Sword");
     EXPECT_EQ(player.getSpellBookSize(), 2);
