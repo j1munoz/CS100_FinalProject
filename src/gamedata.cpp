@@ -67,7 +67,7 @@ void GameData::setLvlCount(const int& level) {
 }
 
 std::vector<Item*> GameData::getBothLists() {
-    bothItemLists.clear();
+    clearBothLists();
 
     for (int i = 0; i < weaponList.size(); i++) {
         bothItemLists.push_back(new Weapon(weaponList[i]));
