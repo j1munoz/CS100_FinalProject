@@ -35,8 +35,8 @@ GameData::GameData(): levelCount(1) {
         Enemy("Adventurer", 30, 10, 5, Weapon("Scimitar", "Uncommon", 20, 20, 100), 25),
         Enemy("Rogue", 25, 20, 10, Weapon("Knife", "Common", 10, 45, 60), 35),
         Enemy("Archer", 10, 40, 0, Weapon("Bow", "Uncommon", 35, 10, 300), 65),
-        Enemy("Knight", 80, 25, 15, Weapon("Crusader Hammer", "Rare", 15, 30, 200), 15),
-        Enemy("Prince", 150, 50, 10, Weapon("Royal Blade", "Legendary", 20, 80, 100), 5)
+        Enemy("Knight", 150, 25, 15, Weapon("Crusader Hammer", "Rare", 15, 30, 200), 15),
+        Enemy("Prince", 250, 50, 10, Weapon("Royal Blade", "Legendary", 20, 80, 100), 5)
     };
   
     monsterList = {

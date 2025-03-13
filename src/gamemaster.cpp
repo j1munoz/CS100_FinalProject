@@ -329,6 +329,7 @@ void GameMaster::battle() {
     
                 // Increment turn-based values (now that players turn is over)
                 if(player.getCastingStatus()) spellInfo->timeElapsed++;
+                turnCount++;
     
                 // Add mana per turn
                 if(player.getMana() + MANA_REGEN > player.getMaxMana()) {
@@ -339,7 +340,6 @@ void GameMaster::battle() {
             }
         } while(player.isAlive() && enemies[currEnemy].isAlive() && stopBattle == false);
     
-        turnCount++;
         // If the player wins
         if(!enemies[currEnemy].isAlive()) {
             cout << "\nCongratulations! You have successfully won the battle against " << enemies[currEnemy].getName() << "!" << endl;
@@ -371,7 +371,11 @@ void GameMaster::battle() {
             }
 
             // Increment level if all enemies slain
-            if(currEnemy == enemies.size()-1) data.setLvlCount(data.getLvlCount() + 1);
+            if(currEnemy == enemies.size()-1) {
+                data.setLvlCount(data.getLvlCount() + 1);
+                cout << "\nReturning to Main Menu..." << endl;
+            }
+            turnCount++;
     
         // If the player loses
         } else if(!player.isAlive()) {
@@ -384,8 +388,6 @@ void GameMaster::battle() {
             player.setExperience(0);
             player.setSkillPoints(0);
         }
-
-        cout << "\nReturning to Main Menu..." << endl;
     }
 
     // Reset player values
