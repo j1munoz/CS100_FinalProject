@@ -25,7 +25,7 @@ When the user begins the game, a randomly generated area will be chosen with its
 Video games have been a large part of our lives growing up. Not only as a source of entertainment, but an outlet to explore our interests, partake in strategic planning, and a fun medium to bond with friends. When used correctly, they can be a great source to connect with others. We think creating our own video game would be a fun idea to try and appreciate all the planning and development that goes into making one. Compared to the functionality of other programs who have a determined purpose, a video game is less rigid in the application of it. It's main goal is to bring fun, and arguably, that can be the hardest thing to achieve sometimes. A video game is the perfect challenge to tackle and have fun with.
 
 ### Languages and Technologies
-We will be using C++ to code our project. Additionally, we will utilize GitHub for version control and VS Code as our chosen IDE to develop in. Valgrind is also a tool we will make use of to ensure the quality of our project has no memory leaks and errors. Lastly, we will also use [Draw.io](https://app.diagrams.net/) for flowcharting and UML Diagram documentation.
+We will be using C++ to code our project. Additionally, we will utilize GitHub for version control and VS Code as our chosen IDE to develop in. Valgrind and the Googletest framework are tools we will make use of to ensure the quality of our project has no memory leaks and errors. Lastly, we will also use [Draw.io](https://app.diagrams.net/) for flowcharting and UML Diagram documentation.
 
 ## User Interface Specification
 
@@ -77,18 +77,38 @@ To apply the SRP, we seperated the `displayItems()` function from the `Shop` cla
 
 This change allows us to write better code because it allows our code to scale and grow without having any hard-coded areas. Before, changing something in the `Shop` class could very well require us to redo the `displayItems()` function. However, now that it's in its own class, we can isolate the functionality of the class and edit only what we need to. Even though we ended up making three more classes to manage, it allows our program to be more flexible and object-oriented.
  
- > ## Final deliverable
- > All group members will give a demo to the reader during lab time. ou should schedule your demo on Calendly with the same reader who took your second scrum meeting. The reader will check the demo and the project GitHub repository and ask a few questions to all the team members. 
- > Before the demo, you should do the following:
- > * Complete the sections below (i.e. Screenshots, Installation/Usage, Testing)
- > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing more work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new features you would like to add. These should appear as issues/cards on your Project board.
- > * Make sure your README file and Project board are up-to-date reflecting the current status of your project (e.g. any changes that you have made during the project such as changes to your class diagram). Previous versions should still be visible through your commit history.
->  * Each team member should also submit the Peer Evaluation Form on Canvas for this final phase. In this form, you need to fill in the names of all team members, the percentage of work contributed by each member for the final phase, and a description of their contributions. Remember that each team member should submit the form individually.
- 
- ## Screenshots
- > Screenshots of the input/output after running your application
- ## Installation/Usage
- > Instructions on installing and running your application
- ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
- 
+## Screenshots
+| Shop | View Item | Equip Item |
+| :-------------: | :-------------: | :-------------: |
+| ![shop](https://github.com/user-attachments/assets/f51d9a48-a6f0-454a-88b4-1288b3c09c19)| ![viewItem](https://github.com/user-attachments/assets/ab223d14-537e-48bb-bffa-1f67cd58a9bd) | ![equipItem](https://github.com/user-attachments/assets/4fa91548-ebf0-42ff-8ea8-39f0cdc23967) |
+
+### Battle
+![battle](https://github.com/user-attachments/assets/25603369-029b-4846-bd98-5256b8ae3703)
+
+## Installation/Usage
+To install and play the game, you will need an Integrated Development Environment (IDE), such as [Vistual Studio](https://visualstudio.microsoft.com/downloads/), [Eclipse](https://www.eclipse.org/downloads/), etc. to host the necessary files and run the program. You can manually download all the files, download a ZIP file, or clone the repository. After doing either, you must run the following commands in the terminal:
+```
+cmake .
+make
+bin/villain_revenge
+```
+After running the previous 3 commands, you will enter the game and must follow the promps on screen to play. If you exit the game, you may reenter the game using `bin/villain_revenge`.
+
+This program is meant to be a text-based terminal game used for entertainment. There are some strategic elements involved that can allow the user to engage in critical thinking and planning. However, as with any game, it is meant purely as a recreational activity and merely just provides entertainment to help the user pass time and have fun.
+
+## Testing
+Our project was tested and validated using Valgrind and the Googletest framework.
+
+### Valgrind
+Valgrind is a programming tool useful for memory debugging, profiling, and leak detection. Using Valgrind, we were able to verify that our program had no memory leaks by using:
+```
+valgrind --leak-check=full --track-origins=yes ./[EXE_FILE]
+```
+After running this command, we were able to see the Heap Summary and any possible errors in the program. We can then trace the source of the memory leak and the type of error that causes this issue. This allows us to ensure that any allocated memory was properly freed / deallocated and no more memory errors remain in our program.
+
+![valgrind](https://github.com/user-attachments/assets/014efa05-288c-4821-8251-d3f6f5f4e7f3)
+
+### Googletest
+The Googletest framework is a C++ testing and mocking framework to help developers write tests for their programs. Utilizing this, we can create Unit Tests for many of our foundational classes (like Player, Enemy, Monster, Spell, Weapon, etc.) and verify that each of the functions output the correct information they should compute. We can validate member variables and functional logic by testing their integrity to ensure they lead to our expected output.
+
+![unit tests](https://github.com/user-attachments/assets/08da7d9c-6eb2-40c6-bf9f-5d5962d2b490)
