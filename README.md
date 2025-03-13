@@ -86,13 +86,21 @@ This change allows us to write better code because it allows our code to scale a
 ![battle](https://github.com/user-attachments/assets/25603369-029b-4846-bd98-5256b8ae3703)
 
 ## Installation/Usage
-To install and play the game, you will need an Integrated Development Environment (IDE), such as [Vistual Studio](https://visualstudio.microsoft.com/downloads/), [Eclipse](https://www.eclipse.org/downloads/), etc. to host the necessary files and run the program. You can manually download all the files, download a ZIP file, or clone the repository. After doing either, you must run the following commands in the terminal:
+To install and play the game, you will need an Integrated Development Environment (IDE), such as [Vistual Studio](https://visualstudio.microsoft.com/downloads/), [Eclipse](https://www.eclipse.org/downloads/), etc. to host the necessary files and run the program. You can manually download all the files, download a ZIP file, or clone the repository. To clone the repository do the following commands into the terminal:
 ```
+git clone https://github.com/cs100/final-project-cs100projectgroup7-lab021.git
+```
+After cloning, run these to install/cmake the game:
+```
+cd final-project-cs100projectgroup7-lab021
 cmake .
 make
+```
+Finally, enter the following:
+```
 bin/villain_revenge
 ```
-After running the previous 3 commands, you will enter the game and must follow the promps on screen to play. If you exit the game, you may reenter the game using `bin/villain_revenge`.
+After running the previous command, you will enter the game and must follow the prompts on screen to play. If you exit the game, you may reenter the game using `bin/villain_revenge`.
 
 This program is meant to be a text-based terminal game used for entertainment. There are some strategic elements involved that can allow the user to engage in critical thinking and planning. However, as with any game, it is meant purely as a recreational activity and merely just provides entertainment to help the user pass time and have fun.
 
