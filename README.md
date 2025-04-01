@@ -88,11 +88,11 @@ This change allows us to write better code because it allows our code to scale a
 ## Installation/Usage
 To install and play the game, you will need an Integrated Development Environment (IDE), such as [Vistual Studio](https://visualstudio.microsoft.com/downloads/), [Eclipse](https://www.eclipse.org/downloads/), etc. to host the necessary files and run the program. You can manually download all the files, download a ZIP file, or clone the repository. To clone the repository do the following commands into the terminal:
 ```
-git clone https://github.com/cs100/final-project-cs100projectgroup7-lab021.git
+git clone https://github.com/j1munoz/CS100_FinalProject.git
 ```
 After cloning, run these to install/cmake the game:
 ```
-cd final-project-cs100projectgroup7-lab021
+cd CS100_FinalProject.git
 cmake .
 make
 ```
